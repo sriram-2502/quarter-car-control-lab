@@ -46,7 +46,7 @@ Augment the plant with $\dot\xi=Cx$ and choose $u=-Kx_a$ to minimize
 
 $$J=\int_0^\infty (x_a^TQx_a+u^TRu)\,dt.$$
 
-The example uses $Q=\operatorname{diag}(3\times10^7,8\times10^7,8\times10^7,2\times10^7,2\times10^{10})$ and $R=0.01$. MATLAB's `lqr` computes the gain. The fourth weight penalizes the transformed state $\eta$, not physical suspension velocity. Weights depend on the state coordinates and units.
+The example uses $Q=\mathrm{diag}(3\times10^7,8\times10^7,8\times10^7,2\times10^7,2\times10^{10})$ and $R=0.01$. MATLAB's `lqr` computes the gain. The fourth weight penalizes the transformed state $\eta$, not physical suspension velocity. Weights depend on the state coordinates and units.
 
 Increase selected state weights to prioritize their regulation, or increase $R$ to discourage control effort. Evaluate all performance measures after every tuning change. This example assumes full-state feedback and does not include an observer, actuator saturation, or anti-windup.
 
