@@ -1,0 +1,66 @@
+{
+  "step": {
+    "NONE": {
+      "acceleration_rms_m_s2": 2.4975007891438343,
+      "tire_deflection_rms_m": 0.013640271115261105,
+      "max_suspension_deflection_m": 0.22067978606640143,
+      "force_rms_kN": 0.0,
+      "force_peak_kN": 0.0,
+      "body_overshoot_percent": 95.3528837933354,
+      "body_settling_time_s": "not settled",
+      "suspension_recovery_time_s": "not settled"
+    },
+    "PID": {
+      "acceleration_rms_m_s2": 13.275072046825784,
+      "tire_deflection_rms_m": 0.018447252704031605,
+      "max_suspension_deflection_m": 0.006251382658385346,
+      "force_rms_kN": 33.173316208877985,
+      "force_peak_kN": 7810.4,
+      "body_overshoot_percent": 54.31093506729448,
+      "body_settling_time_s": 1.27,
+      "suspension_recovery_time_s": 0.14200000000000013
+    },
+    "LQR": {
+      "acceleration_rms_m_s2": 0.7532335871290579,
+      "tire_deflection_rms_m": 0.00612989988354032,
+      "max_suspension_deflection_m": 0.19598627637746474,
+      "force_rms_kN": 3.05015276894385,
+      "force_peak_kN": 33.3135492875751,
+      "body_overshoot_percent": 3.205130167175621,
+      "body_settling_time_s": 1.621,
+      "suspension_recovery_time_s": 1.6179999999999999
+    }
+  },
+  "sine": {
+    "NONE": {
+      "acceleration_rms_m_s2": 1.593078844451914,
+      "tire_deflection_rms_m": 0.008302177894253042,
+      "max_suspension_deflection_m": 0.11755247381903478,
+      "force_rms_kN": 0.0,
+      "force_peak_kN": 0.0,
+      "body_overshoot_percent": null,
+      "body_settling_time_s": null,
+      "suspension_recovery_time_s": null
+    },
+    "PID": {
+      "acceleration_rms_m_s2": 0.8596534340360042,
+      "tire_deflection_rms_m": 0.004743383268336435,
+      "max_suspension_deflection_m": 0.0012863193420719777,
+      "force_rms_kN": 2.140959656246617,
+      "force_peak_kN": 8.149798919691472,
+      "body_overshoot_percent": null,
+      "body_settling_time_s": null,
+      "suspension_recovery_time_s": null
+    },
+    "LQR": {
+      "acceleration_rms_m_s2": 0.44986948847649494,
+      "tire_deflection_rms_m": 0.0024185566595219233,
+      "max_suspension_deflection_m": 0.10436687886968629,
+      "force_rms_kN": 5.383653218698397,
+      "force_peak_kN": 7.8802246290804625,
+      "body_overshoot_percent": null,
+      "body_settling_time_s": null,
+      "suspension_recovery_time_s": null
+    }
+  }
+}

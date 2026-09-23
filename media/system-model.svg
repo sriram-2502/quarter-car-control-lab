@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="440" viewBox="0 0 1000 440" role="img" aria-labelledby="title desc">
+<title id="title">Quarter-car active suspension and feedback loop</title>
+<desc id="desc">Body and wheel masses connected by suspension spring, damper and actuator; tire spring and damper connect the wheel to the road. Controller force and road disturbance drive the plant, and suspension deflection is fed back negatively.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8" fill="#334155"/></marker></defs>
+<rect width="1000" height="440" rx="16" fill="#f8fafc"/>
+<g font-family="Arial, sans-serif" fill="#123445">
+<text x="36" y="42" font-size="22" font-weight="bold">Quarter-Car Control Lab</text>
+<text x="36" y="69" font-size="14" fill="#64748b">Two masses · road disturbance · active suspension force</text>
+<rect x="95" y="100" width="260" height="52" rx="7" fill="#007f8b"/>
+<text x="225" y="133" fill="white" font-size="18" text-anchor="middle">Body mass Mₛ</text>
+<rect x="145" y="263" width="160" height="40" rx="5" fill="#334155"/>
+<text x="225" y="289" fill="white" font-size="17" text-anchor="middle">Wheel mass Mᵤ</text>
+<g stroke="#334155" stroke-width="2.5" fill="none">
+<path d="M130 152 V169 l-10 8 20 12 -20 12 20 12 -20 12 10 8 V263 H145"/>
+<path d="M225 152 V195 M210 187 V220 H240 V187 M215 201 H235 M225 220 V263"/>
+<path d="M320 152 V263 H305" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<path d="M185 303 V317 l-9 7 18 10 -18 10 18 10 -9 7 V380"/>
+<path d="M265 303 V335 M250 326 V359 H280 V326 M255 341 H275 M265 359 V380"/>
+<path d="M100 380 H345"/>
+<path d="M378 145 V108" marker-end="url(#arrow)"/>
+<path d="M330 300 V271" marker-end="url(#arrow)"/>
+<path d="M368 389 V359" marker-end="url(#arrow)"/>
+</g>
+<text x="91" y="216" font-size="16">Kₛ</text><text x="245" y="214" font-size="16">Cₛ</text>
+<text x="334" y="214" font-size="16">u</text>
+<text x="150" y="351" font-size="16">Kₜ</text><text x="287" y="351" font-size="16">Cₜ</text>
+<text x="390" y="128" font-size="16">zₛ</text><text x="343" y="289" font-size="16">zᵤ</text><text x="381" y="375" font-size="16">zᵣ</text>
+<text x="130" y="410" font-size="13" fill="#64748b">Displacements about static equilibrium</text>
+<rect x="570" y="174" width="128" height="60" rx="7" fill="#e0f2f1" stroke="#007f8b" stroke-width="2"/>
+<text x="634" y="200" font-size="16" text-anchor="middle">Controller</text><text x="634" y="221" font-size="13" text-anchor="middle">PID or LQR</text>
+<rect x="770" y="174" width="130" height="60" rx="7" fill="#e2e8f0" stroke="#334155" stroke-width="2"/>
+<text x="835" y="209" font-size="16" text-anchor="middle">Suspension</text>
+<g stroke="#334155" stroke-width="2" fill="none">
+<path d="M698 204 H770" marker-end="url(#arrow)"/>
+<path d="M835 121 V174" marker-end="url(#arrow)"/>
+<path d="M900 204 H956" marker-end="url(#arrow)"/>
+<path d="M930 204 V294 H528 V204 H570" marker-end="url(#arrow)"/>
+</g>
+<text x="732" y="190" font-size="16" text-anchor="middle">u</text>
+<text x="835" y="110" font-size="15" text-anchor="middle">Road zᵣ</text>
+<text x="932" y="188" font-size="15" text-anchor="middle">s = zₛ − zᵤ</text>
+<text x="728" y="321" font-size="13" text-anchor="middle">Negative feedback; zero deflection reference</text>
+<text x="733" y="347" font-size="13" text-anchor="middle" fill="#64748b">LQR uses the augmented state; PID uses s and its history.</text>
+</g></svg>
