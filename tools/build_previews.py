@@ -1,12 +1,8 @@
+"""Compute and validate reference tables; README visuals are exported by MATLAB."""
 from pathlib import Path
 import json
 import numpy as np
 from scipy.linalg import solve_continuous_are, expm
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation, PillowWriter
-from matplotlib.patches import Rectangle
 
 ROOT = Path(__file__).resolve().parents[1]
 p = json.loads((ROOT/'solutions/config.json').read_text())
@@ -18,8 +14,6 @@ Bw = np.array([0,Cs*Ct/(Ms*Mu),-Ct/Mu,-Kt/Mu])
 C = np.array([0,0,1,0])
 Aa = np.zeros((5,5)); Aa[:4,:4]=A; Aa[4,:4]=C
 Ba = np.r_[Bu,0]; Wa=np.r_[Bw,0]
-COLORS={'NONE':'#64748b','PID':'#d97706','LQR':'#007f8b'}
-NAMES={'NONE':'Passive','PID':'PID','LQR':'LQR + integral'}
 
 
 def validate_model():
@@ -115,62 +109,8 @@ def metrics(r):
     return m
 
 
-def plot_runs(runs,road):
-    fig,axs=plt.subplots(3,2,figsize=(11,9),layout='constrained')
-    keys=[('zs','Body displacement (m)'),('s','Suspension deflection (m)'),('acc','Body acceleration (m/s²)'),('tire','Tire deflection (m)'),('u','Actuator force (kN)'),('zr','Road displacement (m)')]
-    for ax,(key,label) in zip(axs.flat,keys):
-        for r in runs:
-            y=r['zu']-r['zr'] if key=='tire' else r[key]/1000 if key=='u' else r[key]
-            ax.plot(r['t'],y,color=COLORS[r['mode']],lw=1.3,label=NAMES[r['mode']])
-        ax.set(xlabel='Time (s)',ylabel=label,xlim=(0,p['duration']))
-        if key in ('acc','u') and road=='step':
-            ax.set_yscale('symlog',linthresh=1)
-            ax.set_title('Symmetric-log scale: preserves step spikes',fontsize=9)
-        ax.grid(alpha=.2)
-    axs[0,0].legend(fontsize=9)
-    fig.suptitle('Quarter-Car Control Lab | '+road.capitalize()+' road input',fontsize=17,fontweight='bold')
-    fig.savefig(ROOT/f'solutions/figures/{road}-comparison.png',dpi=150)
-    plt.close(fig)
-
-
-def animate(runs,road):
-    fig,axes=plt.subplots(1,3,figsize=(10,4.8))
-    fig.subplots_adjust(left=.025,right=.975,bottom=.17,top=.82,wspace=.12)
-    fig.suptitle('Quarter-Car Control Lab | '+road.capitalize()+' road input',fontsize=16,fontweight='bold')
-    objects=[]
-    for ax,r in zip(axes,runs):
-        color=COLORS[r['mode']]
-        ax.set(xlim=(-.65,.65),ylim=(-.15,2.0),xticks=[],yticks=[])
-        ax.set_title(NAMES[r['mode']],color=color,fontweight='bold')
-        for spine in ax.spines.values(): spine.set_visible(False)
-        body=Rectangle((-.4,1),.8,.22,color=color)
-        wheel=Rectangle((-.19,.23),.38,.12,color='#334155')
-        ax.add_patch(body); ax.add_patch(wheel)
-        spring,=ax.plot([],[],color=color,lw=2)
-        tire,=ax.plot([],[],color='#334155',lw=3)
-        ground,=ax.plot([],[],color='#64748b',lw=3)
-        label=ax.text(0,1.90,'',ha='center',va='top',fontsize=10)
-        objects.append((body,wheel,spring,tire,ground,label))
-    fig.text(.5,.08,'Schematic: fixed drawing offsets; vertical motion scale 1:1',ha='center',fontsize=9,color='#475569')
-    stamp=fig.text(.5,.035,'',ha='center',fontsize=10)
-    # Include the exact step-onset frame; 20 fps, real-time playback.
-    frames=np.arange(0,len(runs[0]['t']),round(.05/p['dt']))
-    def update(k):
-        for r,(body,wheel,spring,tire,ground,label) in zip(runs,objects):
-            b=1+r['zs'][k]; w=.23+r['zu'][k]; z=r['zr'][k]
-            body.set_y(b); wheel.set_y(w)
-            sy=np.linspace(w+.12,b,17); sx=.065*(-1.)**np.arange(17)
-            spring.set_data(sx,sy); tire.set_data([0,0],[z,w])
-            ground.set_data([-.6,.6],[z,z])
-            label.set_text(f"deflection {1000*r['s'][k]:+.1f} mm\nforce {r['u'][k]/1000:+.1f} kN")
-        stamp.set_text(f"t = {runs[0]['t'][k]:.2f} s   |   identical road input and mechanical parameters")
-    ani=FuncAnimation(fig,update,frames=frames,interval=50)
-    ani.save(ROOT/f'media/animations/{road}-comparison.gif',writer=PillowWriter(fps=20),dpi=85)
-    plt.close(fig)
-
-
 def main():
-    for directory in ['solutions/figures','media/animations']:
+    for directory in ['solutions']:
         (ROOT/directory).mkdir(parents=True,exist_ok=True)
     validate_model()
     results={}
@@ -189,10 +129,8 @@ def main():
             fmt=lambda v:'N/A' if v is None else v if isinstance(v,str) else f'{v:.4g}'
             lines.append('| '+key.replace('_',' ')+' | '+' | '.join(map(fmt,vals))+' |')
         lines.append('')
-        plot_runs(runs,road)
-        animate(runs,road)
     (ROOT/'solutions/results.json').write_text(json.dumps(results,indent=2)+'\n')
-    (ROOT/'solutions/results.md').write_text('\n'.join(lines)+'\n')
+    (ROOT/'solutions/results.md').write_text('\n'.join(lines).rstrip()+'\n')
     print('PASS: physical coordinate transform, transfer functions, controllability, passive stability, active closed-loop stability, LQR Riccati residual, step equilibria, PID force law, and time-step convergence of states and exact RMS integrals.')
     print(json.dumps(results,indent=2))
 

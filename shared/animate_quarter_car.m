@@ -8,6 +8,9 @@ if nargin < 5, opts = struct(); end
 if nargin < 6, uinfo = struct('t',t,'zr',zr,'label','Input'); end
 
 % -------- defaults (kept exactly as you had) --------
+opts = def(opts,'gifPath',''); opts = def(opts,'screenshotPath','');
+opts = def(opts,'figurePosition',[100 100 1200 850]);
+opts = def(opts,'title','Quarter-car suspension');
 opts = def(opts,'yRoad0',0.00);  opts = def(opts,'yUns0',0.00);  opts = def(opts,'ySpr0',1.15);
 opts = def(opts,'xMass',0.00);
 opts = def(opts,'xSusp',0.00);  opts = def(opts,'xTire',0.00);
@@ -72,8 +75,9 @@ if hasU, uinfo.u = uinfo.u(:); end
 
 % ---------------- Figure layout: (4x2)
 fh = figure('Color','w','Name','Quarter-car: World-fixed Road, Moving Car','NumberTitle','off', ...
-    'Position',[100 100 1200 850]);
+    'Position',opts.figurePosition);
 tl = tiledlayout(fh, 4, 2, 'TileSpacing','compact', 'Padding','compact');
+title(tl,opts.title,'FontWeight','bold','Color',[.1 .1 .1]);
 
 % Row 1: mechanism spans both columns
 axM = nexttile(tl, [1 2]); hold(axM,'on'); axis(axM,'equal'); box(axM,'on'); grid(axM,'on');
@@ -174,7 +178,9 @@ xTravel0 = xC0;
 
 % ---------------- Animate ----------------
 N = numel(t);
-for k = unique([1:opts.frameSkip:N, N])
+frame_indices = unique([1:opts.frameSkip:N, N]);
+for frame_index = 1:numel(frame_indices)
+    k = frame_indices(frame_index);
     tk = t(k);
     xC = x_car(k);
     ySk = yS(k);
@@ -238,8 +244,28 @@ for k = unique([1:opts.frameSkip:N, N])
     set(hCur4,'XData',[tk tk],'YData',ylim(axS4));
     set(hCurC,'XData',[tk tk],'YData',ylim(axC));
 
-    drawnow limitrate;
+    if ~isempty(opts.gifPath)
+        drawnow;
+        frame = getframe(fh);
+        [indexed,map] = rgb2ind(frame.cdata,256);
+        if frame_index < numel(frame_indices)
+            delay = t(frame_indices(frame_index+1))-t(k);
+        else
+            delay = 1; % hold the completed traces before looping
+        end
+        if frame_index == 1
+            imwrite(indexed,map,opts.gifPath,'gif','LoopCount',Inf,'DelayTime',delay);
+        else
+            imwrite(indexed,map,opts.gifPath,'gif','WriteMode','append','DelayTime',delay);
+        end
+    else
+        drawnow limitrate;
+    end
     pause(opts.pausePerFrame);
+end
+if ~isempty(opts.screenshotPath)
+    drawnow;
+    exportgraphics(fh,opts.screenshotPath,'Resolution',120);
 end
 end
 

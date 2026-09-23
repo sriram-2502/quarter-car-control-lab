@@ -67,9 +67,13 @@ The script runs for 10 seconds at 1 ms intervals. The step is 0.2 m at 1 s; the 
 
 ## Results
 
-![Step response comparison](figures/step-comparison.png)
+The figures below are screenshots of the actual MATLAB animation at the end of each simulation. Click a screenshot to view its full size; the links underneath open the corresponding native MATLAB GIF.
 
-![Sinusoidal response comparison](figures/sine-comparison.png)
+| Controller | Step road | Sinusoidal road |
+|---|---|---|
+| Passive | [![Passive step screenshot](figures/passive-step.png)](figures/passive-step.png)<br>[Play animation](../media/animations/passive-step.gif) | [![Passive sine screenshot](figures/passive-sine.png)](figures/passive-sine.png)<br>[Play animation](../media/animations/passive-sine.gif) |
+| PID | [![PID step screenshot](figures/pid-step.png)](figures/pid-step.png)<br>[Play animation](../media/animations/pid-step.gif) | [![PID sine screenshot](figures/pid-sine.png)](figures/pid-sine.png)<br>[Play animation](../media/animations/pid-sine.gif) |
+| LQR | [![LQR step screenshot](figures/lqr-step.png)](figures/lqr-step.png)<br>[Play animation](../media/animations/lqr-step.gif) | [![LQR sine screenshot](figures/lqr-sine.png)](figures/lqr-sine.png)<br>[Play animation](../media/animations/lqr-sine.gif) |
 
 See the [numerical comparison](results.md) and [machine-readable results](results.json). RMS measures use the entire 10-second record, including the initial transient. Step overshoot uses the known final road height; 2% settling time is measured from the step onset. A response still outside the band at the end is reported as not settled. Overshoot and settling time are not assigned to sinusoidal runs.
 
@@ -81,15 +85,26 @@ The [solution notes](solution-notes.pdf), [model derivation](../docs/state-space
 
 The code uses the transformed state consistently, includes the correct PID road term, and computes RMS integrals without missing the fast step transient. Body overshoot and body settling time are supplemental metrics; suspension recovery uses a stated absolute band because percentage overshoot about a zero final deflection is undefined.
 
-## Reproduce previews and validation
+## Reproduce MATLAB visuals and validation
 
-The repository includes a Python companion for generating the checked-in plots, GIFs, and result tables. MATLAB remains the course implementation.
+From the repository root in MATLAB:
+
+```matlab
+addpath('tools');
+export_matlab_media;  % all six native GIFs and animation screenshots
+validate_matlab;      % numerical and graphics checks
+```
+
+The exporter calls the same `animate_quarter_car` function as the demo, captures the MATLAB figure using `getframe`, and writes the GIF with `imwrite`. Screenshots use `exportgraphics` on the final animation frame. No Python-drawn animation or plot is used in the READMEs.
+
+The Python companion independently computes and checks the numerical reference tables. It does not overwrite MATLAB media:
 
 ```sh
 python -m pip install -r tools/requirements.txt
 python tools/build_previews.py
+python tools/validate_repository.py
 ```
 
-Run these commands from the repository root. The companion reads the same JSON parameters, checks the coordinate transformation against the physical equations, verifies closed-loop stability and step equilibria, and checks the PID force law. See [`VALIDATION.md`](../VALIDATION.md) for what was executed.
+See [`VALIDATION.md`](../VALIDATION.md) for the executed checks.
 
-To regenerate the corrected PDFs after the results, install `reportlab` and run `python tools/build_documents.py`. The original editable slide and diagram export are retained in `docs/system-model.pptx` and `media/system-model.png`; the README uses the vector schematic.
+To regenerate the corrected PDFs after the results, install `reportlab` and run `python tools/build_documents.py`. The original editable slide and diagram export are retained in `docs/system-model.pptx` and `media/system-model.png`; an additional vector schematic is available at `media/system-model.svg`. README figures use native MATLAB captures.

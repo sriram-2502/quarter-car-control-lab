@@ -10,8 +10,8 @@ Checked on 2026-09-23.
 - Reconstructed PID force matches proportional, integral, and physical derivative feedback.
 - All six passive/PID/LQR step/sine cases pass an independent adaptive Radau ODE integration with integrated output energies (relative energy tolerance 2e-6).
 - Halving the output interval from 1 ms to 0.5 ms preserves sampled body positions and exact RMS energy integrals (relative energy tolerance 1e-7).
-- MISS_HIT 0.9.44 parsed and linted all seven MATLAB files, including the native validation script, with no reported issues.
-- All three PDFs were rendered and visually inspected. Both animations and the comparison plots were visually reviewed.
+- MISS_HIT 0.9.44 parsed and linted all eight MATLAB files, including the native validation script, with no reported issues.
+- All three PDFs were rendered and visually inspected. All six native MATLAB GIFs and six matching screenshots were checked for frame count, playback timing, file size, and visual correctness.
 
 ## Native MATLAB verification
 
@@ -25,7 +25,7 @@ The reusable [MATLAB validator](tools/validate_matlab.m) runs from the repositor
 
 ## Model limits
 
-The checked-in GIFs were produced by the Python companion; their numerical model is now cross-checked against native MATLAB.
+All six checked-in GIFs are native MATLAB figure captures from `animate_quarter_car`; the six result figures are screenshots exported from the same animation. Each GIF contains 101 frames covering 10 s of motion at 10 fps plus a 1 s final hold. The Python companion only generates and checks numerical tables.
 
 The reference is a linear, full-state, ideal-actuator model. The PID is ideal and unfiltered. Its original gains produce an approximately 7.81 MN peak at the discontinuous road step; this is explicitly reported, not presented as a practical design. The example controllers do not meet all instructional benchmarks.
 
@@ -46,16 +46,17 @@ Native MATLAB validation, starting from the repository root:
 ```matlab
 addpath('tools');
 report = validate_matlab;
+export_matlab_media; % regenerate all six native GIFs and screenshots
 ```
 
-This writes a JSON report and figure exports to a temporary directory. An optional output-directory argument can choose another location.
+`validate_matlab` writes its JSON report and figure exports to a temporary directory; an optional output-directory argument selects another location. `export_matlab_media` writes the published GIFs and screenshots into the repository.
 
 Optional PDF rebuild and MATLAB static analysis:
 
 ```sh
 python -m pip install reportlab miss_hit
 python tools/build_documents.py
-mh_lint solutions starter shared tools/validate_matlab.m
+mh_lint solutions starter shared tools/validate_matlab.m tools/export_matlab_media.m
 ```
 
 The student scaffold intentionally contains incomplete parameters, matrices, and tuning values. Its guards stop execution until the required tasks are completed.
