@@ -4,6 +4,7 @@ function animate_quarter_car(t, zs, zu, zr, opts, uinfo)
 %
 % y_road(X) = yRoad0 + S*zr((X - x0_car)/v_car)  (static in world)
 
+if nargin < 5, opts = struct(); end
 if nargin < 6, uinfo = struct('t',t,'zr',zr,'label','Input'); end
 
 % -------- defaults (kept exactly as you had) --------
@@ -30,8 +31,9 @@ S = opts.dispScale;  Rwh = opts.wheelRadius;
 t  = t(:); zs = zs(:); zu = zu(:); zr = zr(:);
 v  = max(1e-6, opts.carSpeed);
 x_car = opts.x0_car + v*t;
-x_min = min(x_car) - opts.roadMarginL;
-x_max = max(x_car) + opts.roadMarginR;
+carHalfWidth = max([opts.wSprung/2, opts.wUns/2, Rwh]);
+x_min = min(x_car) + min(0,opts.xMass) - opts.roadMarginL - carHalfWidth - 0.1;
+x_max = max(x_car) + max(0,opts.xMass) + opts.roadMarginR + carHalfWidth + 0.1;
 
 % Spatial world road from time signal
 zr_of_tau = @(tau) interp1(t, zr, tau, 'linear', 'extrap');
@@ -42,55 +44,51 @@ roadY     = yroad(roadX);
 % Contact road height under the actual wheel world-x (includes xMass offset)
 yR_contact = yroad(x_car + opts.xMass);   % <-- FIX: sync to wheel x
 
-% Auto-clearance baselines
+% Fixed schematic offsets; apply wheel clearance before body clearance.
+% These offsets do not clip or otherwise alter simulated displacement changes.
 yU = opts.yUns0 + S*zu;
 yS = opts.ySpr0 + S*zs;
-
-% sprung above unsprung
+clear_WR = yU - Rwh - yR_contact;
+shiftU = max(0, opts.minGapWheelRoad - min(clear_WR));
+yU = yU + shiftU;
 clear_SU = (yS - opts.hSprung/2) - (yU + opts.hUns/2);
-cmin = min(clear_SU);
-if cmin < opts.minGapSprUng
-    sh = opts.minGapSprUng - cmin;  opts.ySpr0 = opts.ySpr0 + sh;  yS = yS + sh;
-end
-
-% Fixed drawing clearance (schematic geometry; no per-frame motion clipping)
-wheelBottom = yU - Rwh;
-clear_WR = wheelBottom - yR_contact;
-cmin2 = min(clear_WR);
-if cmin2 < opts.minGapWheelRoad
-    sh2 = opts.minGapWheelRoad - cmin2;  opts.yUns0 = opts.yUns0 + sh2;
-end
+shiftS = max(0, opts.minGapSprUng - min(clear_SU));
+yS = yS + shiftS;
 
 % View limits
 ymin_mech = min([yS - opts.hSprung/2; yU - Rwh; yR_contact]) - opts.viewPadBottom;
 ymax_mech = max([yS + opts.hSprung/2; yU + Rwh; yR_contact]) + opts.viewPadTop;
 
-% Physical velocities estimated from displacement histories for display
-zsd = gradient(zs, t);
-zud = gradient(zu, t);
+% Use exact physical velocities when supplied; estimate only as a fallback
+if isfield(uinfo,'zs_dot') && isfield(uinfo,'zu_dot')
+    zsd = uinfo.zs_dot(:); zud = uinfo.zu_dot(:);
+else
+    zsd = gradient(zs, t); zud = gradient(zu, t);
+end
 
 % Control availability
 hasU = isfield(uinfo,'u') && ~isempty(uinfo.u);
 if hasU, uinfo.u = uinfo.u(:); end
 
 % ---------------- Figure layout: (4x2)
-fh = figure('Color','w','Name','Quarter-car: World-fixed Road, Moving Car','NumberTitle','off');
+fh = figure('Color','w','Name','Quarter-car: World-fixed Road, Moving Car','NumberTitle','off', ...
+    'Position',[100 100 1200 850]);
 tl = tiledlayout(fh, 4, 2, 'TileSpacing','compact', 'Padding','compact');
 
 % Row 1: mechanism spans both columns
 axM = nexttile(tl, [1 2]); hold(axM,'on'); axis(axM,'equal'); box(axM,'on'); grid(axM,'on');
-xlabel(axM,'$x~(\mathrm{m})$', 'Interpreter','latex');
-ylabel(axM,'$z~(\mathrm{m})$', 'Interpreter','latex');
+xlabel(axM,'x (m)', 'Interpreter','tex');
+ylabel(axM,'z (m)', 'Interpreter','tex');
 xlim(axM,[x_min, x_max]); ylim(axM,[ymin_mech, ymax_mech]);
 
 % ---- Static world road
 plot(axM, roadX, roadY, 'k-', 'LineWidth', 2);
 
-% Initial poses (use clamped unsprung height for visuals)
+% Initial poses use the same fixed offsets as every animation frame
 xC0 = x_car(1);  yS0 = yS(1);  yU0 = yU(1);
 xC0_world = xC0 + opts.xMass;
 yR0 = yR_contact(1);
-yU0_draw = max(yU0, yR0 + Rwh + opts.minGapWheelRoad);  % <-- per-frame visual clamp
+yU0_draw = yU0;
 
 % Red contact dot under the wheel center
 hRoadDot = plot(axM, xC0_world, yR0, 'ro', 'MarkerFaceColor','r', 'MarkerSize', 5);
@@ -127,28 +125,28 @@ axS1 = nexttile(tl); hold(axS1,'on'); box(axS1,'on'); grid(axS1,'on');
 m1 = min(zs); M1 = max(zs); if m1==M1, d=max(1e-6,abs(M1)); m1=m1-0.05*d; M1=M1+0.05*d; end
 ylim(axS1,[m1 M1]); xlim(axS1,[t(1) t(end)]);
 hProgS1 = plot(axS1, NaN, NaN, 'LineWidth',1.4, 'Color',[0.0 0.45 0.74]);
-xlabel(axS1,'$t~(\mathrm{s})$', 'Interpreter','latex');  ylabel(axS1,'$z_s~(\mathrm{m})$', 'Interpreter','latex');
+xlabel(axS1,'t (s)', 'Interpreter','tex');  ylabel(axS1,'z_s (m)', 'Interpreter','tex');
 yl1 = ylim(axS1); hCur1 = plot(axS1, [t(1) t(1)], yl1, 'r--', 'LineWidth',1.0);
 
 axS2 = nexttile(tl); hold(axS2,'on'); box(axS2,'on'); grid(axS2,'on');
 m2 = min(zsd); M2 = max(zsd); if m2==M2, d=max(1e-6,abs(M2)); m2=m2-0.05*d; M2=M2+0.05*d; end
 ylim(axS2,[m2 M2]); xlim(axS2,[t(1) t(end)]);
 hProgS2 = plot(axS2, NaN, NaN, 'LineWidth',1.4, 'Color',[0.30 0.30 0.30]);
-xlabel(axS2,'$t~(\mathrm{s})$', 'Interpreter','latex');  ylabel(axS2,'$\dot z_s~(\mathrm{m/s})$', 'Interpreter','latex');
+xlabel(axS2,'t (s)', 'Interpreter','tex');  ylabel(axS2,'dz_s/dt (m/s)', 'Interpreter','tex');
 yl2 = ylim(axS2); hCur2 = plot(axS2, [t(1) t(1)], yl2, 'r--', 'LineWidth',1.0);
 
 axS3 = nexttile(tl); hold(axS3,'on'); box(axS3,'on'); grid(axS3,'on');
 m3 = min(zu); M3 = max(zu); if m3==M3, d=max(1e-6,abs(M3)); m3=m3-0.05*d; M3=M3+0.05*d; end
 ylim(axS3,[m3 M3]); xlim(axS3,[t(1) t(end)]);
 hProgS3 = plot(axS3, NaN, NaN, 'LineWidth',1.4, 'Color',[0.85 0.33 0.10]);
-xlabel(axS3,'$t~(\mathrm{s})$', 'Interpreter','latex');  ylabel(axS3,'$z_u~(\mathrm{m})$', 'Interpreter','latex');
+xlabel(axS3,'t (s)', 'Interpreter','tex');  ylabel(axS3,'z_u (m)', 'Interpreter','tex');
 yl3 = ylim(axS3); hCur3 = plot(axS3, [t(1) t(1)], yl3, 'r--', 'LineWidth',1.0);
 
 axS4 = nexttile(tl); hold(axS4,'on'); box(axS4,'on'); grid(axS4,'on');
 m4 = min(zud); M4 = max(zud); if m4==M4, d=max(1e-6,abs(M4)); m4=m4-0.05*d; M4=M4+0.05*d; end
 ylim(axS4,[m4 M4]); xlim(axS4,[t(1) t(end)]);
 hProgS4 = plot(axS4, NaN, NaN, 'LineWidth',1.4, 'Color',[0.20 0.20 0.60]);
-xlabel(axS4,'$t~(\mathrm{s})$', 'Interpreter','latex');  ylabel(axS4,'$\dot z_u~(\mathrm{m/s})$', 'Interpreter','latex');
+xlabel(axS4,'t (s)', 'Interpreter','tex');  ylabel(axS4,'dz_u/dt (m/s)', 'Interpreter','tex');
 yl4 = ylim(axS4); hCur4 = plot(axS4, [t(1) t(1)], yl4, 'r--', 'LineWidth',1.0);
 
 % Row 4: control spans both columns (dynamic up to cursor)
@@ -161,20 +159,22 @@ else
     text(axC, 0.5, 0.5, 'u(t) not provided', 'Units','normalized', ...
          'HorizontalAlignment','center', 'FontAngle','italic');
 end
-xlabel(axC,'$t~(\mathrm{s})$', 'Interpreter','latex');
-ylabel(axC,'$u$', 'Interpreter','latex');
+xlabel(axC,'t (s)', 'Interpreter','tex');
+ylabel(axC,'u (N)', 'Interpreter','tex');
 xlim(axC,[t(1) t(end)]);
 ylc = ylim(axC); hCurC = plot(axC, [t(1) t(1)], ylc, 'r--', 'LineWidth',1.0);
 
-% LaTeX ticks everywhere
-set([axM, axS1, axS2, axS3, axS4, axC], 'TickLabelInterpreter','latex');
+% Native tick labels render reliably in interactive and batch figures
+set([axM, axS1, axS2, axS3, axS4, axC], 'TickLabelInterpreter','tex');
+
+style_quarter_car_figure(fh);
 
 % rolling reference for rim marker (same as your logic)
 xTravel0 = xC0;
 
 % ---------------- Animate ----------------
 N = numel(t);
-for k = 1:opts.frameSkip:N
+for k = unique([1:opts.frameSkip:N, N])
     tk = t(k);
     xC = x_car(k);
     ySk = yS(k);

@@ -1,0 +1,112 @@
+{
+  "matlab_version": "26.2.0.3386108 (R2026b)",
+  "release": "2026b",
+  "control_system_toolbox": {
+    "Name": "Control System Toolbox",
+    "Version": "26.2",
+    "Release": "(R2026b)",
+    "Date": "22-May-2026"
+  },
+  "cases": [
+    {
+      "mode": "NONE",
+      "road": "step",
+      "metrics": {
+        "acceleration_rms_m_s2": 2.4975007891438428,
+        "tire_deflection_rms_m": 0.013640271115261114,
+        "max_suspension_deflection_m": 0.22067978606640146,
+        "force_rms_kN": 0,
+        "force_peak_kN": 0,
+        "body_overshoot_percent": 95.352883793335508,
+        "body_settling_time_s": "not settled",
+        "suspension_recovery_time_s": "not settled"
+      },
+      "max_normalized_metric_error": 3.3784553838093909E-15,
+      "graphics_passed": true
+    },
+    {
+      "mode": "PID",
+      "road": "step",
+      "metrics": {
+        "acceleration_rms_m_s2": 13.27507204651112,
+        "tire_deflection_rms_m": 0.018447252704030425,
+        "max_suspension_deflection_m": 0.00625138265838579,
+        "force_rms_kN": 33.173316209122952,
+        "force_peak_kN": 7810.4,
+        "body_overshoot_percent": 54.310935067285122,
+        "body_settling_time_s": 1.27,
+        "suspension_recovery_time_s": 0.14200000000000013
+      },
+      "max_normalized_metric_error": 2.3703362921227983E-11,
+      "graphics_passed": true
+    },
+    {
+      "mode": "LQR",
+      "road": "step",
+      "metrics": {
+        "acceleration_rms_m_s2": 0.75323358712956578,
+        "tire_deflection_rms_m": 0.0061298998835396662,
+        "max_suspension_deflection_m": 0.19598627637746624,
+        "force_rms_kN": 3.0501527689412904,
+        "force_peak_kN": 33.313549287574745,
+        "body_overshoot_percent": 3.205130167178341,
+        "body_settling_time_s": 1.621,
+        "suspension_recovery_time_s": 1.6179999999999999
+      },
+      "max_normalized_metric_error": 8.4865396051248491E-13,
+      "graphics_passed": true
+    },
+    {
+      "mode": "NONE",
+      "road": "sine",
+      "metrics": {
+        "acceleration_rms_m_s2": 1.5930788444519279,
+        "tire_deflection_rms_m": 0.0083021778942529278,
+        "max_suspension_deflection_m": 0.11755247381903507,
+        "force_rms_kN": 0,
+        "force_peak_kN": 0,
+        "body_overshoot_percent": null,
+        "body_settling_time_s": null,
+        "suspension_recovery_time_s": null
+      },
+      "max_normalized_metric_error": 8.7809904443804924E-15,
+      "graphics_passed": true
+    },
+    {
+      "mode": "PID",
+      "road": "sine",
+      "metrics": {
+        "acceleration_rms_m_s2": 0.8596534337011934,
+        "tire_deflection_rms_m": 0.0047433832683354818,
+        "max_suspension_deflection_m": 0.0012863193420720245,
+        "force_rms_kN": 2.1409596552808794,
+        "force_peak_kN": 8.1497989196851854,
+        "body_overshoot_percent": null,
+        "body_settling_time_s": null,
+        "suspension_recovery_time_s": null
+      },
+      "max_normalized_metric_error": 4.51077024830577E-10,
+      "graphics_passed": true
+    },
+    {
+      "mode": "LQR",
+      "road": "sine",
+      "metrics": {
+        "acceleration_rms_m_s2": 0.44986948847660196,
+        "tire_deflection_rms_m": 0.0024185566595222364,
+        "max_suspension_deflection_m": 0.10436687886969093,
+        "force_rms_kN": 5.383653218698397,
+        "force_peak_kN": 7.8802246290807272,
+        "body_overshoot_percent": null,
+        "body_settling_time_s": null,
+        "suspension_recovery_time_s": null
+      },
+      "max_normalized_metric_error": 1.0702549957386509E-13,
+      "graphics_passed": true
+    }
+  ],
+  "optional_animation_arguments_passed": true,
+  "demo_passed": true,
+  "starter_guard_passed": true,
+  "all_passed": true
+}

@@ -38,6 +38,8 @@ After completing the project, students should be able to:
 
 Use MATLAB with Control System Toolbox. The scripts use `tiledlayout` (introduced in R2019b). Interactive [`pidTuner`](https://www.mathworks.com/help/control/ref/pidtuner.html) for this MATLAB LTI model is included in Control System Toolbox; it is optional.
 
+The reference solution has been [validated in MATLAB R2026b](VALIDATION.md), including all six controller/input combinations and the plotting/animation paths.
+
 Open [`starter/main_file.m`](starter/main_file.m), complete the marked model and controller entries, and run it. The starter intentionally stops until the parameters and model have been filled in. The animation helper is in `shared/`.
 
 ## Solutions and animations

@@ -213,6 +213,8 @@ set([ax11,ax12,ax21,ax22,ax31], 'TickLabelInterpreter','latex');
 linkaxes([ax11,ax12,ax21,ax22,ax31],'x');
 xlim([t(1) t(end)]);
 
+style_quarter_car_figure(fig);
+
 %% ---------------- Animation  -----------------------------------
 opts = struct();
 opts.carSpeed = 1;

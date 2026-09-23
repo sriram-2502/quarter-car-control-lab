@@ -6,7 +6,8 @@ control_mode = 'LQR'; % 'NONE', 'PID', or 'LQR'
 road_input = 'step';  % 'step' or 'sine'
 show_animation = true;
 r = simulate_quarter_car(control_mode, road_input);
-figure('Color','w','Name',[control_mode ' / ' road_input]);
+figure('Color','w','Name',[control_mode ' / ' road_input], ...
+    'Position',[100 100 1100 800]);
 tiledlayout(3,2,'TileSpacing','compact');
 nexttile; plot(r.t,[r.zs r.zu]); grid on;
 title('Body and wheel'); ylabel('Displacement (m)'); legend('Body','Wheel');
@@ -20,10 +21,12 @@ nexttile; plot(r.t,r.zr); grid on;
 title(r.label); ylabel('Road (m)'); xlabel('Time (s)');
 nexttile; plot(r.t,r.u/1000); grid on;
 title('Actuator force'); ylabel('kN'); xlabel('Time (s)');
+style_quarter_car_figure(gcf);
 metrics = quarter_car_performance_eval(r);
 disp(struct2table(metrics));
 if show_animation
     opts = struct('carSpeed',1);
-    uinfo = struct('t',r.t,'zr',r.zr,'label',r.label,'u',r.u);
+    uinfo = struct('t',r.t,'zr',r.zr,'label',r.label,'u',r.u, ...
+        'zs_dot',r.zs_dot,'zu_dot',r.zu_dot);
     animate_quarter_car(r.t,r.zs,r.zu,r.zr,opts,uinfo);
 end

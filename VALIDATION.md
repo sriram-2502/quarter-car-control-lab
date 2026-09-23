@@ -10,12 +10,22 @@ Checked on 2026-09-23.
 - Reconstructed PID force matches proportional, integral, and physical derivative feedback.
 - All six passive/PID/LQR step/sine cases pass an independent adaptive Radau ODE integration with integrated output energies (relative energy tolerance 2e-6).
 - Halving the output interval from 1 ms to 0.5 ms preserves sampled body positions and exact RMS energy integrals (relative energy tolerance 1e-7).
-- MISS_HIT 0.9.44 parsed and linted all five MATLAB files with no reported issues.
+- MISS_HIT 0.9.44 parsed and linted all seven MATLAB files, including the native validation script, with no reported issues.
 - All three PDFs were rendered and visually inspected. Both animations and the comparison plots were visually reviewed.
 
-## Execution limits
+## Native MATLAB verification
 
-MATLAB was not installed in this environment. Native MATLAB execution and interactive graphics have **not** been verified. Numerical results and GIFs were produced by the Python companion, whose equations and configuration match the MATLAB implementation. A MATLAB syntax check is not a substitute for running MATLAB.
+Executed with MATLAB R2026b (26.2.0.3386108) and Control System Toolbox 26.2 on Windows. All six passive/PID/LQR step/sine cases passed native MATLAB execution and matched the published metrics. The maximum normalized metric difference was 4.51e-10 (tolerance 1e-6; normalization uses max(1, abs(reference))).
+
+The shipped demo ran unchanged, producing its static plots and complete animation. All six animation paths, optional animation inputs, zero-motion inputs, and the intentional starter guard passed. Figures were rendered offscreen and exported for visual review; manual GUI interaction and PID Tuner tuning were not tested.
+
+Native testing prompted fixes to the animation's fixed wheel/body offsets, endpoint margins, physical velocity display, final-frame handling, and figure colors/labels under the dark desktop theme. The controller equations and published numerical results did not change.
+
+The reusable [MATLAB validator](tools/validate_matlab.m) runs from the repository to prevent older same-named files in another working directory from shadowing repository functions. The [native result report](solutions/matlab-validation.json) records the environment, case metrics, and checks.
+
+## Model limits
+
+The checked-in GIFs were produced by the Python companion; their numerical model is now cross-checked against native MATLAB.
 
 The reference is a linear, full-state, ideal-actuator model. The PID is ideal and unfiltered. Its original gains produce an approximately 7.81 MN peak at the discontinuous road step; this is explicitly reported, not presented as a practical design. The example controllers do not meet all instructional benchmarks.
 
@@ -31,12 +41,21 @@ python tools/build_previews.py
 python tools/validate_repository.py
 ```
 
+Native MATLAB validation, starting from the repository root:
+
+```matlab
+addpath('tools');
+report = validate_matlab;
+```
+
+This writes a JSON report and figure exports to a temporary directory. An optional output-directory argument can choose another location.
+
 Optional PDF rebuild and MATLAB static analysis:
 
 ```sh
 python -m pip install reportlab miss_hit
 python tools/build_documents.py
-mh_lint solutions starter shared
+mh_lint solutions starter shared tools/validate_matlab.m
 ```
 
 The student scaffold intentionally contains incomplete parameters, matrices, and tuning values. Its guards stop execution until the required tasks are completed.

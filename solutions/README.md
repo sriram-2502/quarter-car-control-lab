@@ -54,9 +54,10 @@ Increase selected state weights to prioritize their regulation, or increase $R$ 
 
 Open and run [`quarter_car_demo_solution.m`](quarter_car_demo_solution.m). Select `NONE`, `PID`, or `LQR` and `step` or `sine` at the top. Set `show_animation=false` for plots and metrics only.
 
-For a programmatic run, add this directory to the MATLAB path:
+For a programmatic run, start in the repository root and add the solution directory to the MATLAB path. This avoids old same-named files in another current folder taking precedence:
 
 ```matlab
+addpath('solutions');
 r = simulate_quarter_car('LQR', 'step');
 metrics = quarter_car_performance_eval(r);
 disp(struct2table(metrics));
