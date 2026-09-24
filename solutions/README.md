@@ -72,8 +72,8 @@ The figures below are screenshots of the actual MATLAB animation at the end of e
 | Controller | Step road | Sinusoidal road |
 |---|---|---|
 | Passive | [![Passive step screenshot](figures/passive-step.png)](figures/passive-step.png)<br>[Play animation](../media/animations/passive-step.gif) | [![Passive sine screenshot](figures/passive-sine.png)](figures/passive-sine.png)<br>[Play animation](../media/animations/passive-sine.gif) |
-| PID | [![PID step screenshot](figures/pid-step.png)](figures/pid-step.png)<br>[Play animation](../media/animations/pid-step.gif) | [![PID sine screenshot](figures/pid-sine.png)](figures/pid-sine.png)<br>[Play animation](../media/animations/pid-sine.gif) |
-| LQR | [![LQR step screenshot](figures/lqr-step.png)](figures/lqr-step.png)<br>[Play animation](../media/animations/lqr-step.gif) | [![LQR sine screenshot](figures/lqr-sine.png)](figures/lqr-sine.png)<br>[Play animation](../media/animations/lqr-sine.gif) |
+| PID | [![PID step screenshot](figures/pid-step-comparison.png)](figures/pid-step-comparison.png)<br>[Play animation](../media/animations/pid-step-comparison.gif) | [![PID sine screenshot](figures/pid-sine.png)](figures/pid-sine.png)<br>[Play animation](../media/animations/pid-sine.gif) |
+| LQR | [![LQR step screenshot](figures/lqr-step-comparison.png)](figures/lqr-step-comparison.png)<br>[Play animation](../media/animations/lqr-step-comparison.gif) | [![LQR sine screenshot](figures/lqr-sine.png)](figures/lqr-sine.png)<br>[Play animation](../media/animations/lqr-sine.gif) |
 
 See the [numerical comparison](results.md) and [machine-readable results](results.json). RMS measures use the entire 10-second record, including the initial transient. Step overshoot uses the known final road height; 2% settling time is measured from the step onset. A response still outside the band at the end is reported as not settled. Overshoot and settling time are not assigned to sinusoidal runs.
 
@@ -84,6 +84,17 @@ The ideal PID and tire damper can produce large force and acceleration changes f
 The [solution notes](solution-notes.pdf), [model derivation](../docs/state-space-model.pdf), and [assignment](../docs/project.pdf) have been regenerated with consistent notation and equations. See [clarifications](../docs/clarifications.md) for the changes from the Fall 2025 materials. The original Box files remain unchanged.
 
 The code uses the transformed state consistently, includes the correct PID road term, and computes RMS integrals without missing the fast step transient. Body overshoot and body settling time are supplemental metrics; suspension recovery uses a stated absolute band because percentage overshoot about a zero final deflection is undefined.
+
+### Standalone step comparison
+
+Run [`animate_step_comparison.m`](animate_step_comparison.m) for a separate visualization with faded blue passive reference curves. It defaults to LQR and exports a GIF and screenshot. The original demo and standard exports remain available.
+
+```matlab
+comparison_mode = 'LQR'; % or 'PID'
+run('solutions/animate_step_comparison.m');
+```
+
+Run the command from the repository root. The full passive trajectory is a fixed backdrop; the controlled response advances with the time cursor. Each axis includes both responses so the reference is not clipped. The moving mechanism depicts the controlled case.
 
 ## Reproduce MATLAB visuals and validation
 

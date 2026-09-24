@@ -4,7 +4,7 @@
 
 Model a vehicle suspension, design feedback controllers, and investigate the tradeoff between a comfortable ride, road holding, and actuator effort.
 
-![MATLAB animation: LQR suspension response to a road step](media/animations/lqr-step.gif)
+![MATLAB animation: LQR suspension response to a road step](media/animations/lqr-step-comparison.gif)
 
 ## System model
 
@@ -48,13 +48,15 @@ The [solution guide](solutions/README.md) explains the PID and LQR approaches, p
 
 ![MATLAB animation: LQR suspension response to a sinusoidal road](media/animations/lqr-sine.gif)
 
+For controlled step inputs, faded blue traces show the full passive (uncontrolled) response as a fixed reference; the controlled response animates over it.
+
 These GIFs are captured directly from the MATLAB animation window, including the moving suspension, physical displacement/velocity traces, and actuator force. Each shows 10 seconds of simulation at 10 frames per second, followed by a one-second hold. Drawing offsets are schematic; each plot uses the simulated values.
 
 | Controller | Step road | Sinusoidal road |
 |---|---|---|
 | Passive | [Animation](media/animations/passive-step.gif) | [Animation](media/animations/passive-sine.gif) |
-| PID | [Animation](media/animations/pid-step.gif) | [Animation](media/animations/pid-sine.gif) |
-| LQR | [Animation](media/animations/lqr-step.gif) | [Animation](media/animations/lqr-sine.gif) |
+| PID | [Animation](media/animations/pid-step-comparison.gif) | [Animation](media/animations/pid-sine.gif) |
+| LQR | [Animation](media/animations/lqr-step-comparison.gif) | [Animation](media/animations/lqr-sine.gif) |
 
 See the [MATLAB animation screenshots and numerical results](solutions/README.md#results) for all six cases.
 

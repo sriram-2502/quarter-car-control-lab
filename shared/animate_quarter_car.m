@@ -8,6 +8,7 @@ if nargin < 5, opts = struct(); end
 if nargin < 6, uinfo = struct('t',t,'zr',zr,'label','Input'); end
 
 % -------- defaults (kept exactly as you had) --------
+opts = def(opts,'frameCallback',[]);
 opts = def(opts,'gifPath',''); opts = def(opts,'screenshotPath','');
 opts = def(opts,'figurePosition',[100 100 1200 850]);
 opts = def(opts,'title','Quarter-car suspension');
@@ -244,6 +245,9 @@ for frame_index = 1:numel(frame_indices)
     set(hCur4,'XData',[tk tk],'YData',ylim(axS4));
     set(hCurC,'XData',[tk tk],'YData',ylim(axC));
 
+    if ~isempty(opts.frameCallback)
+        opts.frameCallback(fh,k);
+    end
     if ~isempty(opts.gifPath)
         drawnow;
         frame = getframe(fh);

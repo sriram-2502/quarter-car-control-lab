@@ -10,7 +10,7 @@ Checked on 2026-09-23.
 - Reconstructed PID force matches proportional, integral, and physical derivative feedback.
 - All six passive/PID/LQR step/sine cases pass an independent adaptive Radau ODE integration with integrated output energies (relative energy tolerance 2e-6).
 - Halving the output interval from 1 ms to 0.5 ms preserves sampled body positions and exact RMS energy integrals (relative energy tolerance 1e-7).
-- MISS_HIT 0.9.44 parsed and linted all eight MATLAB files, including the native validation script, with no reported issues.
+- MISS_HIT 0.9.44 parsed and linted all nine MATLAB files, including the native validation script, with no reported issues.
 - All three PDFs were rendered and visually inspected. All six native MATLAB GIFs and six matching screenshots were checked for frame count, playback timing, file size, and visual correctness.
 
 ## Native MATLAB verification
@@ -23,9 +23,11 @@ Native testing prompted fixes to the animation's fixed wheel/body offsets, endpo
 
 The reusable [MATLAB validator](tools/validate_matlab.m) runs from the repository to prevent older same-named files in another working directory from shadowing repository functions. The [native result report](solutions/matlab-validation.json) records the environment, case metrics, and checks.
 
+The standalone step-comparison script was executed for PID and LQR. Assertions verify that all five faded-blue reference traces exactly equal the passive simulation on the same road/time grid. Both exports contain 101 frames with 11 s playback; the shared plot limits include both controlled and passive trajectories.
+
 ## Model limits
 
-All six checked-in GIFs are native MATLAB figure captures from `animate_quarter_car`; the six result figures are screenshots exported from the same animation. Each GIF contains 101 frames covering 10 s of motion at 10 fps plus a 1 s final hold. The Python companion only generates and checks numerical tables.
+The six standard GIFs and two standalone step-comparison GIFs are native MATLAB figure captures from `animate_quarter_car`; their matching result figures are screenshots exported from the same animation. Each GIF contains 101 frames covering 10 s of motion at 10 fps plus a 1 s final hold. The Python companion only generates and checks numerical tables.
 
 The reference is a linear, full-state, ideal-actuator model. The PID is ideal and unfiltered. Its original gains produce an approximately 7.81 MN peak at the discontinuous road step; this is explicitly reported, not presented as a practical design. The example controllers do not meet all instructional benchmarks.
 
