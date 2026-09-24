@@ -1,0 +1,37 @@
+\documentclass[letterpaper,10pt]{article}
+\usepackage[letterpaper,margin=0.75in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage{amsmath,amssymb,bm,graphicx,float,booktabs,array}
+\usepackage{xcolor,enumitem,tcolorbox,listings,textcomp,empheq}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlist[enumerate]{itemsep=0.6em,topsep=0.4em}
+\lstdefinestyle{mymatlab}{language=Matlab,
+ basicstyle=\ttfamily\footnotesize,keywordstyle=\color{blue!70!black},
+ stringstyle=\color{teal!60!black},commentstyle=\itshape\color{gray!70},
+ emph={t1,y1,G1,num1,den1},emphstyle=\color{magenta}\bfseries,
+ numbers=left,numberstyle=\tiny\color{gray!70},backgroundcolor=\color{gray!5},
+ frame=single,showstringspaces=false,upquote=true,breaklines=true,
+ columns=fullflexible,keepspaces=true,xleftmargin=1.5em,framexleftmargin=0.3em}
+\lstset{style=mymatlab}
+\newcommand{\RMS}{\mathrm{RMS}}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\dochead}[1]{\begin{center}{\Large\bfseries ME 4030: Final Project}\\[5pt]
+ {\large #1}\\[4pt]Quarter-Car Active Suspension\\
+ Corrected public edition, September 2026\end{center}}
+\newcommand{\task}[1]{\subsection*{#1}}
+\newcommand{\eom}{\begin{align}
+ M_s\ddot z_s&=-K_s(z_s-z_u)-C_s(\dot z_s-\dot z_u)+u,\label{eq:body}\\
+ M_u\ddot z_u&=K_s(z_s-z_u)+C_s(\dot z_s-\dot z_u)-K_t(z_u-z_r)-C_t(\dot z_u-\dot z_r)-u.\label{eq:wheel}
+ \end{align}}
+\newcommand{\parameters}{\begin{center}\begin{tabular}{lll}\toprule
+ Parameter & Value & Meaning\\\midrule
+ $M_s$ & $2500\ \mathrm{kg}$ & Sprung mass\\
+ $M_u$ & $320\ \mathrm{kg}$ & Unsprung mass\\
+ $K_s$ & $80000\ \mathrm{N/m}$ & Suspension stiffness\\
+ $C_s$ & $350\ \mathrm{N\,s/m}$ & Suspension damping\\
+ $K_t$ & $500000\ \mathrm{N/m}$ & Tire stiffness\\
+ $C_t$ & $15020\ \mathrm{N\,s/m}$ & Tire damping\\\bottomrule
+ \end{tabular}\end{center}}

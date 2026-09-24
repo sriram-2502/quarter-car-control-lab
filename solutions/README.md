@@ -81,7 +81,7 @@ The ideal PID and tire damper can produce large force and acceleration changes f
 
 ## Corrected solution notes
 
-The [solution notes](solution-notes.pdf), [model derivation](../docs/state-space-model.pdf), and [assignment](../docs/project.pdf) have been regenerated with consistent notation and equations. See [clarifications](../docs/clarifications.md) for the changes from the Fall 2025 materials. The original Box files remain unchanged.
+The corrected [LaTeX worked solution](solution-notes.pdf) gives the full transfer-function, coordinate-transform, PID, and integral-LQR derivations, numerical comparisons, corrected MATLAB figures, and executable code listings. The matching [assignment](../docs/project.pdf) preserves the original questions and grading. The shorter [model derivation](../docs/state-space-model.pdf) remains available as a reference. See [clarifications](../docs/clarifications.md) for the changes from the Fall 2025 materials. The original Box files remain unchanged.
 
 The code uses the transformed state consistently, includes the correct PID road term, and computes RMS integrals without missing the fast step transient. Body overshoot and body settling time are supplemental metrics; suspension recovery uses a stated absolute band because percentage overshoot about a zero final deflection is undefined.
 
@@ -118,4 +118,4 @@ python tools/validate_repository.py
 
 See [`VALIDATION.md`](../VALIDATION.md) for the executed checks.
 
-To regenerate the corrected PDFs after the results, install `reportlab` and run `python tools/build_documents.py`. The original editable slide and diagram export are retained in `docs/system-model.pptx` and `media/system-model.png`; an additional vector schematic is available at `media/system-model.svg`. README figures use native MATLAB captures.
+To regenerate the corrected PDFs, first run `tools/export_document_figures.m` in MATLAB, then run `python tools/build_documents.py` with NumPy/SciPy available. The builder uses Tectonic in Conda's `latex-env`; see the [LaTeX sources and build instructions](../latex/README.md). The original editable slide and diagram export are retained in `docs/system-model.pptx` and `media/system-model.png`; an additional vector schematic is available at `media/system-model.svg`. README figures use native MATLAB captures.

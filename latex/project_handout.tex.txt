@@ -1,0 +1,1561 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[letterpaper,10pt,conference,onecolumn]{ieeeconf}
+\usepackage[letterpaper,top=0.75in,bottom=0.75in,left=0.75in,right=0.75in]{geometry}
+\IEEEoverridecommandlockouts                             
+\overrideIEEEmargins                                   
+
+\usepackage{graphics} % for pdf, bitmapped graphics files
+\usepackage{float}
+\usepackage{epsfig} % for postscript graphics files
+\usepackage{times} % assumes new font selection scheme installed
+\usepackage{amsmath, bm} % assumes amsmath package installed
+\usepackage{dsfont}
+\usepackage{amsfonts}  % assumes amsmath package installed
+\usepackage{comment}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{array} % Optional, for customizing column alignment
+\usepackage{multirow} % For merging rows
+% \usepackage{caption} % For using \caption* to remove numbering
+\usepackage{placeins}
+\usepackage{graphicx}
+\usepackage{tabularx,booktabs}
+\usepackage{color}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{textcomp}
+\usepackage{psfrag}
+\usepackage{multimedia}
+\usepackage{fancybox}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{varioref}
+\usepackage{import}
+\usepackage{framed,xcolor}
+\usepackage{color}
+\usepackage{float}
+\usepackage{etoolbox}
+\usepackage{soul}
+\usepackage{graphicx}     
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage[algo2e,linesnumbered,ruled]{algorithm2e}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{tcolorbox}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{empheq}
+\usetikzlibrary{arrows.meta,calc,decorations.pathmorphing,positioning}
+
+\usetikzlibrary{arrows.meta,positioning,calc}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing}
+
+% for code snippets
+\usepackage{listings}
+\lstdefinestyle{mymatlab}{
+  language=Matlab,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue!70!black},
+  stringstyle=\color{teal!60!black},
+  commentstyle=\itshape\color{gray!70},
+  % Color ALL identifiers (variable-like tokens):
+  % identifierstyle=\color{violet!80!black},
+  % Or: color only specific variable names:
+  emph={t1,y1,G1,num1,den1}, emphstyle=\color{magenta}\bfseries,
+  numbers=left, numberstyle=\tiny\color{gray!70},
+  backgroundcolor=\color{gray!5},
+  frame=single,
+  showstringspaces=false,
+  upquote=true
+}
+
+%% new commands for convenience 
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\minus}{\scalebox{0.8}{$-$}}
+\newcommand{\plus}{\scalebox{0.6}{$+$}}
+\newcommand{\bA}{{\mathbf A}}
+\newcommand{\bB}{{\mathbf B}}
+\newcommand{\bb}{{\mathbf b}}
+\newcommand{\bc}{{\mathbf c}}
+\newcommand{\bC}{{\mathbf C}}
+\newcommand{\bd}{{\mathbf d}}
+\newcommand{\bD}{{\mathbf D}}
+\newcommand{\be}{{\mathbf e}}
+\newcommand{\bE}{{\mathbf E}}
+\newcommand{\bff}{{\mathbf f}}
+\newcommand{\bF}{{\mathbf F}}
+\newcommand{\bg}{{\mathbf g}}
+\newcommand{\bG}{{\mathbf G}}
+\newcommand{\bh}{{\mathbf h}}
+\newcommand{\bH}{{\mathbf H}}
+\newcommand{\bI}{{\mathbf I}}
+\newcommand{\bJ}{{\mathbf J}}
+\newcommand{\bk}{{\mathbf k}}
+\newcommand{\bK}{{\mathbf K}}
+\newcommand{\bl}{{\mathbf l}}
+\newcommand{\bL}{{\mathbf L}}
+\newcommand{\bM}{{\mathbf M}}
+\newcommand{\bn}{{\mathbf n}}
+\newcommand{\bp}{{\mathbf p}}
+\newcommand{\bP}{{\mathbf P}}
+\newcommand{\bQ}{{\mathbf Q}}
+\newcommand{\bR}{{\mathbf R}}
+\newcommand{\bs}{{\mathbf s}}
+\newcommand{\bS}{{\mathbf S}}
+\newcommand{\bT}{{\mathbf T}}
+\newcommand{\bu}{{\mathbf u}}
+\newcommand{\bU}{{\mathbf U}}
+\newcommand{\bv}{{\mathbf v}}
+\newcommand{\bV}{{\mathbf V}}
+\newcommand{\bw}{{\mathbf w}}
+\newcommand{\bW}{{\mathbf W}}
+\newcommand{\bx}{{\mathbf x}}
+\newcommand{\bX}{{\mathbf X}}
+\newcommand{\by}{{\mathbf y}}
+\newcommand{\bY}{{\mathbf Y}}
+\newcommand{\bz}{{\mathbf z}}
+\newcommand{\bZ}{{\mathbf Z}}
+\newcommand{\brho}{{\boldsymbol \rho}}
+\newcommand{\bPhi}{{\boldsymbol \Phi}}
+\newcommand{\bPsi}{{\boldsymbol \Psi}}
+\newcommand{\bzero}{{\mathbf 0}}
+\newcommand{\bomega}{{\boldsymbol \omega}}
+\newcommand{\bpsi}{{\boldsymbol \psi}}
+\newcommand{\mC}{{\mathbb C}}
+\newcommand{\mD}{{\mathbb D}}
+\newcommand{\mE}{{\mathbb E}}
+\newcommand{\mN}{{\mathbb N}}
+\newcommand{\mP}{{\mathbb P}}
+\newcommand{\mR}{{\mathbb R}}
+\newcommand{\mU}{{\mathbb U}}
+\newcommand{\cC}{{\cal C}}
+\newcommand{\cD}{{\cal D}}
+\newcommand{\cF}{{\cal F}}
+\newcommand{\cI}{{\cal I}}
+\newcommand{\cK}{{\cal K}}
+\newcommand{\cL}{{\cal L}}
+\newcommand{\cN}{{\cal N}}
+\newcommand{\cP}{{\cal P}}
+\newcommand{\cR}{{\cal R}}
+\newcommand{\cS}{{\cal S}}
+\newcommand{\cU}{{\cal U}}
+\newcommand{\cW}{{\cal W}}
+\newcommand{\cX}{{\cal X}}
+\newcommand{\cZ}{{\cal Z}}
+\newcommand{\bcC}{{\boldsymbol{\mathcal C}}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{\textbf{Lemma}}
+\newtheorem{assumption}{Assumption}
+\newtheorem{remark}{Remark}
+\newtheorem{property}{Property}
+\newtheorem{notation}{Notations}
+\newtheorem{proposition}{Proposition}
+\newtheorem{example}{Example}
+\newtheorem{corollary}{\textbf{Corollary}}
+\newtheorem{problem}{Problem}
+% \newtheorem{proof}{Proof}
+
+\title{\LARGE \bf
+ME4030 -- Fall 2025: Final Project}
+
+\author{Assigned: 10/31/2025 \quad Due: 12/02/2025}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent
+\textbf{Instructions.} Unless stated otherwise, use the $10\text{–}90\%$ rise time and the $2\%$ settling band. Use the starting code provided in \texttt{MATALB} and complete the code blocks for each task.
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=black,title=What to submit]
+A single PDF with your solutions (including steps) and the PDF of code and figures exported from \texttt{MATLAB} (where necessary). Note: Please combine everything into one PDF for the final submission. Do not submit zip files with code or multiple files.
+\end{tcolorbox}
+\vspace{5mm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent
+\textbf{Problem Statement:}  The quarter-car model is a widely used representation of a vehicle suspension system, capturing the vertical dynamics of one wheel assembly and a portion of the vehicle body. The objective is to design a controller to determine the force output from an active suspension system to mitigate road events like potholes and bumps.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Figures/Fall2025/Project/ME4030_project.png}
+\end{figure}
+
+The elements of the model are:
+\begin{itemize}
+    \item Sprung mass $m_s = 2500 $ (kg)
+    \item Unsprung mass $m_u = 320$ (kg)
+    \item Suspension stiffness $k_s = 80000$ (N/m)
+    \item Suspension damping coefficient $c_s = 350$ (Ns/m)
+    \item Tire stiffness $k_t = 500000$ (N/m)
+    \item Tire damping coefficient $c_t=15020$ (Ns/m)\\
+\end{itemize}
+
+The displacement of the sprung and unsprung mass is denoted as $z_s(t)$ and $z_u(t)$, respectively, and the road profile $z_r(t)$ is an external input to this system. The active suspension force input is denoted as $u(t)$. \\
+
+The linearized dynamics of the quarter-car system are given by:
+\begin{align}
+m_s \ddot{z}_s(t) &= -k_s\big(z_s(t) - z_u(t)\big) \;-\; c_s\big(\dot{z}_s(t) - \dot{z}_u(t)\big) \;+\; u(t), \label{eq:zs}\\[6pt]
+m_u \ddot{z}_u(t) &= \phantom{-}k_s\big(z_s(t) - z_u(t)\big) \;+\; c_s\big(\dot{z}_s(t) - \dot{z}_u(t)\big) \;+\; k_t\big(z_r(t) - z_u(t)\big) +\; c_t\big(\dot{z}_r(t) - \dot{z}_u(t)\big) \;-\; u(t). \label{eq:zu}
+\end{align}
+
+The following are the measurements from the steady state of the system.
+\begin{align*}   
+% &x_c(t) := z_s(t)-z_r(t)\quad\text{(body--road, comfort)},\\
+&x_s(t) := z_s(t)-z_u(t)\quad\text{(suspension deflection)},\\
+&x_h(t) := z_u(t)-z_r(t)\quad\text{(tire--road, road holding)}.
+\end{align*}
+
+\newpage
+\noindent
+\textbf{Performance metrics:}\\
+The objective is to design the active suspension force $u(t)$ that satisfies the following performance metrics.\\
+
+\begin{enumerate}
+  \item \textbf{Ride Comfort:}
+  Evaluates how smoothly passengers experience the ride by measuring the root mean square (RMS) acceleration of the sprung mass relative to the road.
+  \[
+    a_{\mathrm{rms}} = \sqrt{\frac{1}{T}\int_0^T \ddot z_s^2(t)\,dt},\qquad T=10\,\mathrm{s}.
+  \]
+  \emph{Targets:} Excellent $\le 0.35~\mathrm{m/s^2}$;\; Good $\le 0.50~\mathrm{m/s^2}$;\; Acceptable $\le 0.70~\mathrm{m/s^2}$.\\
+
+  \item \textbf{Road Holding:}
+  Quantifies the tire–road relative displacement to assess how well the tire maintains continuous contact with the road surface.
+  \[
+    x_{h,\mathrm{RMS}} = \sqrt{\frac{1}{T}\int_0^T \big(z_u(t)-z_r(t)\big)^2\,dt}, \qquad T=10\,\mathrm{s}.
+  \]
+  \emph{Targets:} Excellent $\le 0.008~\mathrm{m}$;\; Good $\le 0.012~\mathrm{m}$;\; Acceptable $\le 0.020~\mathrm{m}$.\\
+  
+  \item \textbf{Transient Performance:}  
+    The relative displacement output $x_s(t)$ should exhibit limited overshoot and fast settling when subjected to a step road disturbance (e.g., the vehicle emerging from a $0.20~\mathrm{m}$ pothole).  
+    The performance categories are defined as follows:
+
+    \[
+    \begin{array}{lcc}
+    \toprule
+    \emph{Targets} & \textrm{Overshoot }(M_p) & \textrm{Settling Time }(t_s) \\
+    \midrule
+    \text{Excellent} & M_p \le 2\% & t_s \le 3~\mathrm{s} \\
+    \text{Good}      & M_p \le 5\% & t_s \le 5~\mathrm{s} \\
+    \text{Acceptable}& M_p \le 10\% & t_s \le 7~\mathrm{s} \\
+    \bottomrule
+    \end{array}
+    \]\\
+  \item \textbf{Suspension Deflection:}
+  Measures the relative motion between the sprung and unsprung masses to ensure the suspension stroke stays within safe mechanical limits.
+  \[
+    \mathrm{max}(|x_s|) = \max|z_s(t)-z_u(t)|.
+  \]
+  \emph{Targets:} Excellent $\le 0.015~\mathrm{m}$;\; Good $\le 0.025~\mathrm{m}$;\; Acceptable $\le 0.040~\mathrm{m}$.\\
+
+\item \textbf{Control Effort:} 
+Represents the actuator force required by the controller, ensuring comfort and stability are achieved without excessive energy use.
+\[
+  u_{\mathrm{rms}} = \sqrt{\frac{1}{T}\int_0^T u^2(t)\,dt}, \qquad T=10\,\mathrm{s}.
+\]
+\emph{Targets:} Excellent $\le 1.5~\mathrm{kN}$, Good $\le 2.5~\mathrm{kN}$, Acceptable $\le 3.5~\mathrm{kN}$.
+\end{enumerate}
+\vspace{5mm}
+Fill out the following table for each controller (with road input as \texttt{'step'}) and include it in the report.
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Metric [Units]} & \textbf{Open-Loop} & \textbf{PID} & \textbf{LQR} & \textbf{Target Achieved} \\
+\midrule
+\quad  &  & $K_p=\_$ & $Q=\_$ &  \\[-2pt]
+\quad  &  & $K_i=\_$ & $R=\_$ &  \\[-2pt]
+\quad  &  & $K_d=\_$ & $K=[\_,\_,\_,\_,]$ &  \\
+\midrule
+Ride Comfort [$a_{\mathrm{rms}}$, m/s$^2$]     &\_   &\_   &\_   &\_   \\
+Overshoot ($x_s$ to 0.2 m step) [\%]           &\_   &\_   &\_   &\_   \\
+Settling Time ($x_s$ to 0.2 m step) [s]        &\_   &\_   &\_   &\_   \\
+Max Deflection [$\max|x_s|$, m]                &\_   &\_   &\_   &\_   \\
+Road Holding [$x_{h,\mathrm{rms}}$, m]         &\_   &\_   &\_   &\_   \\
+Control Effort [$u_{\mathrm{rms}}$, kN]        &\_   &\_   &\_   &\_   \\
+\bottomrule
+\end{tabular}
+\label{tab:suspension_comparison}
+\end{table}
+
+
+\newpage
+\noindent
+\textbf{Task 1 (30 pts): Design a PID controller}
+\begin{enumerate}[label=\textbf{(\alph*)}, itemsep=1.1em]
+  \item Write the transfer function for this system with the relative displacement $Z_u(s) - Z_s(s)$ as the output and controller $U(s)$ as the input.
+    \[ G_1(s) = \frac{Z_u(s) - Z_s(s)}{U(s)}\]  
+  % Study the response of the system for a 0.2m step disturbance when the suspension force input $u(t)=0$.
+
+   \item Write the transfer function for this system with the relative displacement $Z_u(s) - Z_s(s)$ as the output and the road profile $Z_r(s)$ as the input. 
+   \[ G_2(s) = \frac{Z_u(s) - Z_s(s)}{Z_r(s)}\]
+   % Study the Impulse response of the system when the road disturbance $z_r(t)=0$.
+
+   \item Simulate the open-loop system response when the road input is a step and a sinusoidal type. (Use the provided MATLAB code and set \texttt{road\_input} to \texttt{'step'} and \texttt{'sine'})
+   
+   \item Design a PID controller to achieve the given performance metrics. Report the values of $K_p$, $K_d$ and $K_i$ used. (Hint: Use MATLAB's \texttt{pidTuner} GUI and use the gain values from the bottom left of the GUI. Note that the step response shown in the GUI is for the system with no disturbance i.e., $z_r(t)=0$).
+   
+   \item Simulate the response of the closed-loop system with your PID controller for a 0.2m step disturbance and compute the performance metrics. (Hint: you may not satisfy all the metrics with one set of PID gains. You may design multiple sets of PID gains and analyze the corresponding performance. Use the provided MATLAB code and set \texttt{road\_input} to \texttt{'step'})
+   
+   \item Discuss how your controller performs when the road disturbance is a sine wave by $z_r(t) = A\sin(2 \pi f t)$ for $A=0.1$m and $f=0.5$ Hz. (Use the provided MATLAB code and set \texttt{road\_input} to \texttt{'sine'}).
+
+\end{enumerate}
+
+\vspace{5mm}
+\noindent
+\textbf{Task 2 (30 pts): Design a LQR controller}
+\begin{enumerate}[label=\textbf{(\alph*)}, itemsep=1.1em]
+  \item Write the system in the state space form: $\dot x = \bar A x + B_u u + B_{z_r} z_r + B_{\dot z_r} \dot z_r$ with the states $\mathbf{x} = [z_s,\; \dot{z}_s, \;  z_u, \; \dot{z}_u]$.
+
+  \item Obtain a new state space model suitable for control design by eliminating the terms involving the road input $z_r$ and $\dot{z}_r$ with the states $\mathbf{x} = [z_s,\; \dot{z}_s, \;  x_s, \; Y]$ as: 
+   \[\dot{\mathbf{x}} = A \mathbf{x} + B_1 u(t) + B_2 z_r(t); \qquad y = C \mathbf{x} \] 
+   \[
+    Y := \int \left[
+    \left(\frac{1}{m_s}+\frac{1}{m_u}\right)u
+    -\frac{k_t}{m_u}z_r
+    -\frac{c_t}{m_u}\dot z_r
+    \right] dt
+   \]
+   where the output $y = x_s$.  Determine if the system is stable. Is this system controllable in $(A,\,B_1)$?
+
+    \item Simulate the open-loop system response when the road input is a step and a sinusoidal type. (Use the provided MATLAB code and set \texttt{road\_input} to \texttt{'step'} and \texttt{'sine'})
+   
+  \item Design a LQR controller to achieve the given performance metrics. Report the values of the cost matrices $Q$, $R$ and the gain $K_{\textrm{lqr}}$ used. (Hint: $Q$ and $R$ are the tuning parameters for this controller).
+
+  \textbf{Hint:} Use \texttt{lqr} command. 
+To eliminate steady-state error in the suspension deflection $x_s(t)$, augment the system with an \emph{integral state} of the output.  
+Define an additional state $y_I = \int x_s\,dt$ and extend the state-space matrices  
+\[
+A_a = \begin{bmatrix} A & 0 \\ C & 0 \end{bmatrix}, \qquad 
+B_a = \begin{bmatrix} B_1 \\ 0 \end{bmatrix}.
+\]
+Use the augmented matrices $(A_a, B_a)$ when computing the LQR gain.
+  
+  \item  Simulate the response of the closed-loop system with your PID controller for a 0.2m step disturbance and compute the performance metrics. (Hint: Experiment with different cost matrices and analyze the performance. Use the provided MATLAB code and set \texttt{road\_input} to \texttt{'step'})
+
+  \item Discuss how your controller performs when the road disturbance is a sine wave given by $z_r(t) = A\sin(2 \pi f t)$ for $A=0.1$m and $f=0.5$ Hz. (Use the provided MATLAB code and set \texttt{road\_input} to \texttt{'sine'}).
+  
+\end{enumerate}
+
+\vspace{5mm}
+\noindent
+\textbf{Task 3 (40 pts): Performance Analysis and Discussion}
+\begin{enumerate}[label=\textbf{(\alph*)}, itemsep=1.1em]
+
+  \item Analyze the trade-offs between ride comfort and road holding achieved using the PID and LQR controllers.
+
+  \item Examine the suspension deflection and control effort required for both the PID and LQR controllers. Discuss how this might affect actuator design and practical implementation.
+
+  \item Which controller provides a more robust response to varying road disturbances and why?
+
+  \item Imagine extending your active suspension controller to work like an ``autopilot” feature. Can AI or data-driven algorithms help the system automatically adjust control gains or predict road disturbances ahead of time? Discuss the benefits and challenges (such as safety, reliability, or data requirements).
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\textbf{Task 1:}
+\section*{\textbf{Quarter-Car: Transfer Functions}}
+
+Lets use simpler notations below
+\[
+X_1 \equiv Z_s, \quad
+X_2 \equiv Z_u, \quad
+W \equiv Z_r,
+\]
+\[
+M_1 \equiv m_s,\;
+M_2 \equiv m_u,\;
+b_1 \equiv c_s,\;
+b_2 \equiv c_t,\;
+K_1 \equiv k_s,\;
+K_2 \equiv k_t.
+\]
+
+\subsection*{\textbf{Transfer functions \(G_1(s)\) and \(G_2(s)\)}}
+
+%---------------------------------------------
+% 1. Equations of motion (time domain)
+%---------------------------------------------
+The quarter–car active suspension is modelled as
+\begin{align*}
+M_1 \ddot X_1
+&= -b_1(\dot X_1 - \dot X_2) - K_1(X_1 - X_2) + U, \\
+M_2 \ddot X_2
+&=  b_1(\dot X_1 - \dot X_2) + K_1(X_1 - X_2)
+   + b_2(\dot W - \dot X_2) + K_2(W - X_2) - U. 
+\end{align*}
+
+%---------------------------------------------
+% 2. Laplace transform (zero ICs)
+%---------------------------------------------
+Taking the Laplace transform (zero initial conditions) gives
+\begin{align}
+(M_1 s^2 + b_1 s + K_1) X_1(s) - (b_1 s + K_1) X_2(s) &= U(s), \label{eq:lap1} \\
+-(b_1 s + K_1) X_1(s)
++ (M_2 s^2 + (b_1 + b_2) s + K_1 + K_2) X_2(s)
+&= (b_2 s + K_2) W(s) - U(s). \label{eq:lap2}
+\end{align}
+
+%---------------------------------------------
+% 3. Matrix form and determinant
+%---------------------------------------------
+Equations \eqref{eq:lap1}–\eqref{eq:lap2} can be written as
+\begin{equation}
+\begin{bmatrix}
+M_1 s^2 + b_1 s + K_1 & -(b_1 s + K_1) \\
+-(b_1 s + K_1) & M_2 s^2 + (b_1 + b_2) s + K_1 + K_2
+\end{bmatrix}
+\begin{bmatrix}
+X_1(s) \\[2pt] X_2(s)
+\end{bmatrix}
+=
+\begin{bmatrix}
+U(s) \\[2pt] (b_2 s + K_2) W(s) - U(s)
+\end{bmatrix}. \nonumber
+\end{equation}
+Define
+\begin{align*}
+A(s) &=
+\begin{bmatrix}
+M_1 s^2 + b_1 s + K_1 & -(b_1 s + K_1) \\
+-(b_1 s + K_1) & M_2 s^2 + (b_1 + b_2) s + K_1 + K_2
+\end{bmatrix}, \\
+\Delta(s) &= \det A(s) \notag\\
+&= (M_1 s^2 + b_1 s + K_1)\bigl(M_2 s^2 + (b_1 + b_2) s + K_1 + K_2\bigr)
+          - (b_1 s + K_1)^2. \label{eq:Delta}
+\end{align*}
+
+The inverse of \(A(s)\) is
+\begin{equation}
+A(s)^{-1}
+= \frac{1}{\Delta(s)}
+\begin{bmatrix}
+M_2 s^2 + b_2 s + K_2 &
+b_1 b_2 s^2 + (b_1 K_2 + b_2 K_1) s + K_1 K_2 \\[2pt]
+- M_1 s^2 &
+M_1 b_2 s^3 + (M_1 K_2 + b_1 b_2) s^2
++ (b_1 K_2 + b_2 K_1) s + K_1 K_2
+\end{bmatrix}. \nonumber
+\end{equation}
+
+Thus
+\begin{equation}
+\begin{bmatrix}
+X_1(s) \\[2pt] X_2(s)
+\end{bmatrix}
+=
+\frac{1}{\Delta(s)}
+\begin{bmatrix}
+M_2 s^2 + b_2 s + K_2 &
+b_1 b_2 s^2 + (b_1 K_2 + b_2 K_1) s + K_1 K_2 \\[2pt]
+- M_1 s^2 &
+M_1 b_2 s^3 + (M_1 K_2 + b_1 b_2) s^2
++ (b_1 K_2 + b_2 K_1) s + K_1 K_2
+\end{bmatrix}
+\begin{bmatrix}
+U(s) \\[2pt] W(s)
+\end{bmatrix}. \nonumber
+\end{equation}
+
+%---------------------------------------------
+% 4. Relative displacement and transfer functions
+%---------------------------------------------
+\vspace{10mm}
+Let the output be the relative displacement
+\begin{equation}
+Y(s) = X_1(s) - X_2(s). \nonumber
+\end{equation}
+
+\vspace{5mm}
+\paragraph{For $G_1(s)$ with Control input \(U(s)\) only}
+Set \(W(s)=0\). Then
+\begin{equation}
+G_1(s)
+= \frac{Y(s)}{U(s)}
+= \frac{(M_1 + M_2) s^2 + b_2 s + K_2}{\Delta(s)}.
+\end{equation}
+\vspace{5mm}
+
+\paragraph{For $G_2(s)$ Road input \(W(s)\) only}
+Set \(U(s)=0\). Then
+\begin{equation}
+G_2(s)
+= \frac{Y(s)}{W(s)}
+= \frac{-M_1 b_2 s^3 - M_1 K_2 s^2}{\Delta(s)}.
+\end{equation}
+\newpage
+\textbf{Task 1:}
+\section*{\textbf{PID controller design}}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Figures/Fall2025/Project/pid_controller.png}
+    \caption{PID controller with gains $K_p = 208000$, $K_d = 832000$ and $K_i = 624000$ for a 0.2m step disturbance input}
+    \label{fig:PID}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\textbf{Task 2:}
+\section*{\textbf{Quarter-Car: State-Space Model}}
+
+The linearized quarter-car dynamics are
+\begin{align}
+m_s \ddot z_s &= -k_s(z_s - z_u) - c_s(\dot z_s - \dot z_u) + u(t), \tag{1}\\
+m_u \ddot z_u &= k_s(z_s - z_u) + c_s(\dot z_s - \dot z_u)
++ k_t(z_r - z_u) + c_t(\dot z_r - \dot z_u) - u(t). \tag{2}
+\end{align}
+
+%=========================================================
+\vspace{10mm}
+\subsection*{1.\ State-Space Model (inputs: $u, z_r, \dot z_r$)}
+
+Choose the physical state vector
+\[
+x =
+\begin{bmatrix}
+x_1 \\ x_2 \\ x_3 \\ x_4
+\end{bmatrix}
+=
+\begin{bmatrix}
+z_s \\ \dot z_s \\ z_u \\ \dot z_u
+\end{bmatrix}.
+\]
+
+Then
+\begin{align*}
+\dot x_1 &= \dot z_s = x_2,\\
+\dot x_2 &= \ddot z_s
+= \frac{-k_s(x_1-x_3)-c_s(x_2-x_4)+u}{m_s},\\
+\dot x_3 &= \dot z_u = x_4,\\
+\dot x_4 &= \ddot z_u
+= \frac{k_s(x_1-x_3)+c_s(x_2-x_4)
+      -k_t(x_3-z_r)-c_t(x_4-\dot z_r)-u}{m_u}.
+\end{align*}
+
+This can be written compactly as $\dot x = \bar A x + B_u u + B_{z_r} z_r + B_{\dot z_r} \dot z_r$ with
+\[
+\bar A =
+\begin{bmatrix}
+0 & 1 & 0 & 0 \\[4pt]
+-\displaystyle \frac{k_s}{m_s} & -\displaystyle \frac{c_s}{m_s} & \displaystyle \frac{k_s}{m_s} & \displaystyle \frac{c_s}{m_s} \\[6pt]
+0 & 0 & 0 & 1 \\[4pt]
+\displaystyle \frac{k_s}{m_u} & \displaystyle \frac{c_s}{m_u} & \displaystyle \frac{-(k_s+k_t)}{m_u} & \displaystyle \frac{-(c_t+c_s)}{m_u}
+\end{bmatrix},
+\]
+\[
+B_u =
+\begin{bmatrix}
+0 \\[4pt]
+\displaystyle \frac{1}{m_s} \\[4pt]
+0 \\[4pt]
+-\displaystyle \frac{1}{m_u}
+\end{bmatrix},
+\qquad
+B_{z_r} =
+\begin{bmatrix}
+0 \\ 0 \\ 0 \\[4pt]
+-\displaystyle \frac{k_t}{m_u}
+\end{bmatrix},
+\qquad
+B_{\dot z_r} =
+\begin{bmatrix}
+0 \\ 0 \\ 0 \\[4pt]
+-\displaystyle \frac{c_t}{m_u}
+\end{bmatrix}.
+\]
+The output (suspension deflection, $x_s$) is
+\[
+y = z_s - z_u = \bar C x,
+\qquad
+\bar C =
+\begin{bmatrix}
+1 & 0 & -1 & 0
+\end{bmatrix}.
+\]
+
+Note that the model $\dot x = \bar A x + B_u u + B_{z_r} z_r + B_{\dot z_r} \dot z_r$ is difficult to use for control design since it involves derivatives of road input, which we do not receive as feedback. (We will need external sensors like LiDARs/cameras to account for this info in the control design problem).
+
+%=========================================================
+\newpage
+\subsection*{2.\ State-Space Model for control design (inputs: $u, z_r$)}
+
+\textbf{Eliminating $\dot z_r$}
+
+We now outline how to a model whose inputs are
+only the actuator force $u(t)$ and road displacement $z_r(t)$.
+
+\paragraph{Step 1: Let $x_s$ denote the suspension deflection.}
+\[
+x_s = z_s - z_u
+\]
+
+\paragraph{Step 2: Express $\ddot x_s$ using (1)–(2).}
+From the equations of motion,
+\begin{align*}
+\ddot z_s &= \frac{-k_s(z_s-z_u)-c_s(\dot z_s-\dot z_u)+u}{m_s},\\
+\ddot z_u &= \frac{k_s(z_s-z_u)+c_s(\dot z_s-\dot z_u)
+            -k_t(z_u-z_r)-c_t(\dot z_u-\dot z_r)-u}{m_u}.
+\end{align*}
+Subtracting gives
+\begin{align}
+\ddot x_s
+&= \ddot z_s - \ddot z_u \nonumber\\
+&=
+\left(\frac{1}{m_s}+\frac{1}{m_u}\right)u
+-\left(\frac{k_s}{m_s}+\frac{k_s}{m_u}\right)x_s
+-\left(\frac{c_s}{m_s}+\frac{c_s}{m_u}\right)\dot x_s +\frac{k_t}{m_u}(z_u - z_r)+\frac{c_t}{m_u}(\dot z_u - \dot z_r). \label{3}
+\end{align}
+
+Equation \eqref{3} shows that $\ddot x_s$ depends on $z_r$ and also
+on $\dot z_r$. If we write this as a
+first-order system, the input derivatives $\dot z_r$ (and implicitly
+$\ddot z_r$) appear explicitly, which is undesirable for control design.
+
+\paragraph{Step 3: Introduce an integral state to absorb input derivatives.}
+To avoid $\dot z_r$ and $\ddot z_r$ in the state equations, we introduce
+an auxiliary state
+\[
+Y(t)
+=
+\int\!\left[
+\left(\frac{1}{m_s}+\frac{1}{m_u}\right)u
+-\frac{k_t}{m_u}z_r
+-\frac{c_t}{m_u}\dot z_r
+\right] dt,
+\]
+\[
+\dot Y
+=
+\left(\frac{1}{m_s}+\frac{1}{m_u}\right)u
+-\frac{k_t}{m_u}z_r
+-\frac{c_t}{m_u}\dot z_r.
+\]
+With a suitable rearrangement of terms, the
+dynamics of $z_s$, $\dot z_s$, $x_s$, and $Y$ can then be written
+without explicit $\dot z_r$ or $\ddot z_r$ in the right-hand side.\\
+
+\paragraph{Step 4: Obtain the state space model.}
+Define the new state vector
+\[
+x =
+\begin{bmatrix}
+x_1\\ x_2\\ x_3\\ x_4
+\end{bmatrix}
+=
+\begin{bmatrix}
+z_s\\ \dot z_s\\ x_s\\ Y
+\end{bmatrix},
+\]
+
+The resulting first-order model has the form: $\dot x = A x + B_1 u + B_2 z_r$
+\[
+A =
+\begin{bmatrix}
+0 & 1 & 0 & 0 \\[6pt]
+-\displaystyle \frac{c_s c_t}{m_s m_u} & 0 &
+\displaystyle \frac{c_s}{m_s}\!\left(\frac{c_s}{m_s}+\frac{c_s}{m_u}+\frac{c_t}{m_u}\right)
+- \displaystyle \frac{k_s}{m_s}
+&
+-\displaystyle \frac{c_s}{m_s} \\[10pt]
+\displaystyle \frac{c_t}{m_u} & 0 &
+-\left(\displaystyle \frac{c_s}{m_s}+\frac{c_s}{m_u}+\frac{c_t}{m_u}\right)
+& 1 \\[10pt]
+\displaystyle \frac{k_t}{m_u} & 0 &
+-\left(\displaystyle \frac{k_s}{m_s}+\frac{k_s}{m_u}+\frac{k_t}{m_u}\right)
+& 0
+\end{bmatrix},
+\]
+\[
+B_1 =
+\begin{bmatrix}
+0 \\[6pt]
+\displaystyle \frac{1}{m_s} \\[6pt]
+0 \\[6pt]
+\displaystyle \frac{1}{m_s}+\frac{1}{m_u} 
+\end{bmatrix}, \quad
+B_2 =
+\begin{bmatrix}
+0 \\[6pt]
+\displaystyle \frac{c_s c_t}{m_s m_u} \\[6pt]
+-\displaystyle \frac{c_t}{m_u} \\[6pt]
+-\displaystyle \frac{k_t}{m_u}
+\end{bmatrix}.
+\]
+
+The measured output is the suspension deflection, $x_s$
+\[
+y = x_s = x_3,
+\qquad
+C = \begin{bmatrix}0 & 0 & 1 & 0\end{bmatrix},\qquad
+D = \begin{bmatrix}0 & 0\end{bmatrix}.
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\subsubsection*{\textbf{Equation for $\dot x_1$}}
+By definition,
+\[
+x_1 = z_s \quad\Longrightarrow\quad
+\dot x_1 = \dot z_s = x_2 .
+\]
+Hence, 
+\begin{empheq}[box=\fbox]{equation}
+\dot x_1
+= 
+0 \cdot x_1
++ x_2
++ 0 \cdot x_3
++ 0 \cdot x_4
++ 0 \cdot u
++ 0 \cdot z_r.
+\label{eq:x1dot_final}
+\end{empheq}
+
+\vspace{10mm}
+\subsubsection*{\textbf{Equation for $\dot x_2$}}
+We recall the sprung-mass equation of motion
+\begin{equation}
+\ddot z_s
+= \frac{-k_s(z_s - z_u) - c_s(\dot z_s - \dot z_u) + u}{m_s}.
+\label{eq:zs_ddot_start}
+\end{equation}
+Using the suspension deflection
+\[
+x_s = z_s - z_u, 
+\qquad 
+\dot x_s = \dot z_s - \dot z_u,
+\]
+we rewrite \eqref{eq:zs_ddot_start} as
+\begin{equation}
+\ddot z_s
+= -\frac{k_s}{m_s} x_s
+  -\frac{c_s}{m_s} \dot x_s
+  + \frac{1}{m_s} u.
+\label{eq:zs_ddot_xs}
+\end{equation}
+
+Next, we use the relative-motion equation for $x_s$,
+\begin{align}
+\ddot x_s
+&=
+\left(\frac{1}{m_s}+\frac{1}{m_u}\right)u
+-\left(\frac{k_s}{m_s}+\frac{k_s}{m_u}\right)x_s
+-\left(\frac{c_s}{m_s}+\frac{c_s}{m_u}\right)\dot x_s 
+-\frac{k_t}{m_u}(z_r - z_u)
+-\frac{c_t}{m_u}(\dot z_r - \dot z_u).
+\label{eq:xs_ddot_raw}
+\end{align}
+
+We express $z_u$ and $\dot z_u$ in terms of $z_s$ and $x_s$:
+\[
+z_u = z_s - x_s,
+\qquad
+\dot z_u = \dot z_s - \dot x_s.
+\]
+Substituting these into \eqref{eq:xs_ddot_raw} yields
+\begin{align}
+\ddot x_s
+&=
+\left(\frac{1}{m_s}+\frac{1}{m_u}\right)u
+-\left(\frac{k_s}{m_s}+\frac{k_s}{m_u}\right)x_s
+-\left(\frac{c_s}{m_s}+\frac{c_s}{m_u}\right)\dot x_s 
+-\frac{k_t}{m_u}(z_r - z_s + x_s )
+-\frac{c_t}{m_u}(\dot z_r - \dot z_s + \dot x_s).
+\label{eq:xs_ddot_expanded}
+\end{align}
+
+We expand the tire spring and damper terms:
+\begin{align*}
+-\frac{k_t}{m_u}(z_r - z_s + x_s)
+&=
++\frac{k_t}{m_u} z_s
+- \frac{k_t}{m_u} x_s
+- \frac{k_t}{m_u} z_r,
+\\[6pt]
+-\frac{c_t}{m_u}(\dot z_r - \dot z_s - \dot x_s)
+&=
++\frac{c_t}{m_u}\dot z_s
+- \frac{c_t}{m_u}\dot x_s
+- \frac{c_t}{m_u}\dot z_r.
+\end{align*}
+
+Substituting these back into \eqref{eq:xs_ddot_expanded} gives
+\begin{align}
+\ddot x_s
+&=
+\left(\frac{1}{m_s}+\frac{1}{m_u}\right)u
+-\left(\frac{k_s}{m_s}+\frac{k_s}{m_u}\right)x_s
+-\left(\frac{c_s}{m_s}+\frac{c_s}{m_u}\right)\dot x_s \nonumber\\
+&\qquad
++\frac{k_t}{m_u}z_s
+- \frac{k_t}{m_u}x_s
+- \frac{k_t}{m_u}z_r \nonumber\\
+&\qquad
++\frac{c_t}{m_u}\dot z_s
+- \frac{c_t}{m_u}\dot x_s
+- \frac{c_t}{m_u}\dot z_r.
+\label{eq:xs_ddot_expanded2}
+\end{align}
+
+We now substitute the state definitions
+\[
+x_1 = z_s,
+\qquad
+x_2 = \dot z_s,
+\qquad
+x_3 = x_s = z_s - z_u,
+\qquad
+\dot x_3 = \dot x_s.
+\]
+
+Then \eqref{eq:xs_ddot_expanded2} becomes
+\begin{align}
+\ddot x_s
+&=
+\left(\frac{1}{m_s}+\frac{1}{m_u}\right)u
+-\left(\frac{k_s}{m_s}+\frac{k_s}{m_u}\right)x_3
+-\left(\frac{c_s}{m_s}+\frac{c_s}{m_u}\right)\dot x_3 \nonumber\\
+&\qquad
++\frac{k_t}{m_u}x_1
+- \frac{k_t}{m_u}x_3
+- \frac{k_t}{m_u}z_r \nonumber\\
+&\qquad
++\frac{c_t}{m_u}x_2
+- \frac{c_t}{m_u}\dot x_3
+- \frac{c_t}{m_u}\dot z_r.
+\label{eq:xs_ddot_step3}
+\end{align}
+
+We now introduce the integral state used to absorb the road input and its derivative:
+\begin{equation}
+\dot Y
+=
+\left(\frac{1}{m_s}+\frac{1}{m_u}\right)u
+-\frac{k_t}{m_u}z_r
+-\frac{c_t}{m_u}\dot z_r.
+\label{eq:Ydot}
+\end{equation}
+
+Grouping terms in $u$, $z_r$, and $\dot z_r$ in
+\eqref{eq:xs_ddot_step3} according to \eqref{eq:Ydot},
+and collecting terms in $x_1$, $x_2$, $x_3$, and $\dot x_3$, we obtain
+\begin{align}
+\ddot x_s
+&=
+\dot Y
+-\frac{k_t}{m_u}\,x_1
+-\frac{c_t}{m_u}\,x_2
+-\left(\frac{k_s}{m_s}+\frac{k_s}{m_u}-\frac{k_t}{m_u}\right)x_3 
+-\left(\frac{c_s}{m_s}+\frac{c_s}{m_u}-\frac{c_t}{m_u}\right)\dot x_3.
+\label{eq:xs_ddot_final}
+\end{align}
+
+Finally, since $x_2 = \dot z_s$ and $\dot x_2 = \ddot z_s$, we substitute
+\eqref{eq:zs_ddot_xs} together with \eqref{eq:xs_ddot_final} to obtain
+the second state equation:
+
+\begin{empheq}[box=\fbox]{align}
+\dot x_2
+&=
+-\frac{c_s c_t}{m_s m_u}\,x_1 + 0 \cdot x_2
++\left[
+\frac{c_s}{m_s}\!\left(
+\frac{c_s}{m_s}
++\frac{c_s}{m_u}
++\frac{c_t}{m_u}
+\right)
+-\frac{k_s}{m_s}
+\right] x_3 
+-\frac{c_s}{m_s}\,x_4
++\frac{1}{m_s}\,u
++\frac{c_s c_t}{m_s m_u}\,z_r.
+\label{eq:x2dot_final_complete}
+\end{empheq}
+
+
+\vspace{10mm}
+\subsubsection*{\textbf{Equation for $\dot x_3$}}
+
+Recall that the suspension deflection is
+\[
+x_s = z_s - z_u.
+\]
+We choose it as the third state
+\[
+x_3 = x_s = z_s - z_u.
+\]
+Differentiating,
+\begin{equation}
+\dot x_3 = \dot x_s = \dot z_s - \dot z_u. \nonumber
+\end{equation}
+
+To express $\dot x_3$ in terms of the chosen states and inputs only, we
+use the relative-motion equation for $x_s$:
+\begin{align}
+\ddot x_s
+&=
+\left(\frac{1}{m_s}+\frac{1}{m_u}\right)u
+-\left(\frac{k_s}{m_s}+\frac{k_s}{m_u}\right)x_s
+-\left(\frac{c_s}{m_s}+\frac{c_s}{m_u}\right)\dot x_s
+-\frac{k_t}{m_u}(z_r - z_u)
+-\frac{c_t}{m_u}(\dot z_r - \dot z_u).
+\label{eq:xs_ddot_rel}
+\end{align}
+
+Using $x_s = z_s - z_u$, we write
+\[
+z_u = z_s - x_s,
+\qquad
+\dot z_u = \dot z_s - \dot x_s.
+\]
+Substituting into \eqref{eq:xs_ddot_rel} and expanding gives (as in the
+previous subsection) an expression of the form
+\begin{align}
+\ddot x_s
+&=
+\left(\frac{1}{m_s}+\frac{1}{m_u}\right)u
+-\frac{k_t}{m_u}z_r
+-\frac{c_t}{m_u}\dot z_r
+-\left(\frac{c_s}{m_s}+\frac{c_s}{m_u}+\frac{c_t}{m_u}\right)\dot x_s
++\frac{c_t}{m_u} z_s
+-\frac{c_t}{m_u} z_r.
+\label{eq:xs_ddot_grouped}
+\end{align}
+
+The first line of \eqref{eq:xs_ddot_grouped} contains only the inputs
+$u$, $z_r$, and $\dot z_r$. We introduce
+the integral state
+\begin{equation}
+x_4 = Y
+=
+\int \left[
+\left(\frac{1}{m_s}+\frac{1}{m_u}\right)u
+-\frac{k_t}{m_u}z_r
+-\frac{c_t}{m_u}\dot z_r
+\right] dt,
+\label{eq:Y_def}
+\end{equation}
+so that
+\begin{equation}
+\dot x_4
+=
+\left(\frac{1}{m_s}+\frac{1}{m_u}\right)u
+-\frac{k_t}{m_u}z_r
+-\frac{c_t}{m_u}\dot z_r.
+\label{eq:x4_dot_def}
+\end{equation}
+
+With this definition, \eqref{eq:xs_ddot_grouped} can be rewritten using
+\eqref{eq:x4_dot_def} as
+\begin{equation}
+\ddot x_s
+=
+\dot x_4
+-\left(\frac{c_s}{m_s}+\frac{c_s}{m_u}+\frac{c_t}{m_u}\right)\dot x_s
++\frac{c_t}{m_u} z_s
+-\frac{c_t}{m_u} z_r.
+\label{eq:xs_ddot_Y}
+\end{equation}
+
+Now we express everything in terms of the states:
+\[
+z_s = x_1,
+\qquad
+\dot x_s = \dot x_3.
+\]
+Substituting into \eqref{eq:xs_ddot_Y}, we obtain a first-order
+relationship between $\dot x_3$ and $x_4$:
+\begin{equation}
+\ddot x_3
+=
+\dot x_4
+-\left(\frac{c_s}{m_s}+\frac{c_s}{m_u}+\frac{c_t}{m_u}\right)\dot x_3
++\frac{c_t}{m_u} x_1
+-\frac{c_t}{m_u} z_r.
+\label{eq:x3_ddot_relation}
+\end{equation}
+
+Regrouping \eqref{eq:x3_ddot_relation} as a first-order state equation
+for $x_3$ (and dropping the explicit second derivative notation by
+treating \eqref{eq:x3_ddot_relation} as the defining relation for
+$\dot x_3$), we write
+\begin{empheq}[box=\fbox]{equation}
+\dot x_3
+=
+\frac{c_t}{m_u} x_1 + 0 \cdot x_2
+-\left(\frac{c_s}{m_s}+\frac{c_s}{m_u}+\frac{c_t}{m_u}\right) x_3
++ x_4 + 0 \cdot u
+-\frac{c_t}{m_u} z_r.
+\label{eq:x3_dot_final}
+\end{empheq}
+
+
+\vspace{10mm}
+\subsubsection*{\textbf{Equation for $\dot x_4$}}
+By definition of the integral state $Y$, the fourth state is
+\[
+x_4 = Y
+\]
+so its time derivative is
+\begin{equation}
+\dot x_4 = \dot Y
+=
+\left(\frac{1}{m_s}+\frac{1}{m_u}\right)u
+-\frac{k_t}{m_u}z_r
+-\frac{c_t}{m_u}\dot z_r.
+\label{eq:x4_dot_raw}
+\end{equation}
+
+On the other hand, from the expanded expression for $\ddot x_s$ in
+terms of $z_s, x_s, \dot z_s, \dot x_s, z_r, \dot z_r$ \eqref{eq:xs_ddot_expanded2}, we have
+\begin{align}
+\ddot x_s
+&=
+\left(\frac{1}{m_s}+\frac{1}{m_u}\right)u
+-\left(\frac{k_s}{m_s}+\frac{k_s}{m_u}\right)x_s
+-\left(\frac{c_s}{m_s}+\frac{c_s}{m_u}\right)\dot x_s \nonumber\\
+&\qquad
++\frac{k_t}{m_u}z_s
+- \frac{k_t}{m_u}x_s
+- \frac{k_t}{m_u}z_r \nonumber\\
+&\qquad
++\frac{c_t}{m_u}\dot z_s
+- \frac{c_t}{m_u}\dot x_s
+- \frac{c_t}{m_u}\dot z_r.
+\label{eq:xs_ddot_again}
+\end{align}
+
+Using the state definitions
+\[
+x_1 = z_s, \qquad x_2 = \dot z_s, \qquad x_3 = x_s, \qquad x_4 = Y,
+\]
+and recalling that $\dot x_s = \dot x_3$, we can rewrite
+\eqref{eq:xs_ddot_again} as
+\begin{align}
+\ddot x_s
+&=
+\left(\frac{1}{m_s}+\frac{1}{m_u}\right)u
+-\frac{k_t}{m_u}z_r
+-\frac{c_t}{m_u}\dot z_r
+-\left(\frac{k_s}{m_s}+\frac{k_s}{m_u}+\frac{k_t}{m_u}\right)x_3
+-\frac{k_t}{m_u}x_1,
+\label{eq:xs_ddot_grouped_for_x4}
+\end{align}
+
+Comparing \eqref{eq:x4_dot_raw} and
+\eqref{eq:xs_ddot_grouped_for_x4}, and eliminating $\dot z_r$ using the
+relationship between $\ddot x_s$, $\dot x_4$, and the state-dependent
+terms, we obtain a first-order expression for $\dot x_4$ involving only
+the states $x_1,x_2,x_3,x_4$, the control input $u$, and the road
+displacement $z_r$:
+\begin{empheq}[box=\fbox]{align}
+\dot x_4
+&=
+\frac{k_t}{m_u} x_1
++ 0 \cdot x_2
+- \left(
+    \frac{k_s}{m_s}
+  + \frac{k_s}{m_u}
+  + \frac{k_t}{m_u}
+  \right) x_3
++ 0 \cdot x_4
++ \left( \frac{1}{m_s} + \frac{1}{m_u} \right) u
+- \frac{k_t}{m_u} z_r.
+\end{empheq}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\textbf{Task 2:}
+\section*{\textbf{LQR controller design}}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{Figures/Fall2025/Project/lqr_controller.png}
+    \caption{LQR controller with $Q_x = diag[200,\;20,\;800,\;20]$, $Q_i=10^{10}$ and $R=0.1$ for a 0.2m step disturbance input.}
+    \label{fig:lqr}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\textbf{Task 3: Metrics}
+\textbf{Task 3: Metrics}
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Metric [Units]} & \textbf{LQR} & \textbf{Target Achieved} \\
+\midrule
+\quad  & $Q=\mathrm{diag}[200,\;20,\;800,\;20,\;10^{10}]$ &  \\[-2pt]
+\quad  & $R=0.1$ &  \\[-2pt]
+\quad  & $K = [0.4314,\;0.1401,\;0.0122,\;-0.0006,\;3.1623] \times 10^5$ &  \\
+\midrule
+Ride Comfort [$a_{\mathrm{rms}}$, m/s$^2$]     & 0.85623     & Poor       \\
+Overshoot ($x_s$ to 0.2 m step) [\%]            & 37.277  & Poor  \\
+Settling Time ($x_s$ to 0.2 m step) [s]         & 3.841      & Good       \\
+Max Deflection [$\max|x_s|$, m]                 & 0.22172      & poor       \\
+Road Holding [$x_{h,\mathrm{rms}}$, m]          & 0.0070768      & Excellent       \\
+Control Effort [$u_{\mathrm{rms}}$, kN]         & 1.1471      & Excellent  \\
+\bottomrule
+\end{tabular}
+\label{tab:suspension_comparison}
+\end{table}
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Metric [Units]} & \textbf{PID} & \textbf{Target Achieved} \\
+\midrule
+\quad  & $K_p = 208000$ &  \\[-2pt]
+\quad  & $K_i = 624000$ &  \\[-2pt]
+\quad  & $K_d = 832000$ &  \\
+\midrule
+Ride Comfort [$a_{\mathrm{rms}}$, m/s$^2$]     & 1.3552        & Poor       \\
+Overshoot ($x_s$ to 0.2 m step) [\%]            & 24.575        & Poor  \\
+Settling Time ($x_s$ to 0.2 m step) [s]         & 4.932        & Good       \\
+Max Deflection [$\max|x_s|$, m]                 & 0.16561        & Poor       \\
+Road Holding [$x_{h,\mathrm{rms}}$, m]          & 0.0066815        & Excellent       \\
+Control Effort [$u_{\mathrm{rms}}$, kN]         & 3.2598        & Acceptable  \\
+\bottomrule
+\end{tabular}
+\label{tab:suspension_comparison}
+\end{table}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+
+ \textbf{MATLAB code: \texttt{main.m}}
+    \begin{lstlisting}[style=mymatlab, caption={}, label={lst:main_file}]
+% ME 4030 - Fall 2025 - final project
+clc; close all;
+
+%% ---------------- Parameters (in SI units) ----------------
+% TODO: input values here
+Ms  = 2500;     % (sprung)
+Mu  = 320;      % (unsprung)
+Ks  = 80000;    % suspension spring
+Cs  = 350;      % suspension damper
+Kt  = 500000;   % tire stiffness
+Ct  = 15020;    % tire damper
+
+% simulation time (s)
+Tend = 10.0;  dt = 1/1000;
+t = (0:dt:Tend).';
+
+% road input type
+% TODO: pick 'sine' or 'step' based on the requirements
+road_input = 'step'; % sine or step
+
+% controller type
+% TODO: pick 'LQR' or 'PID' based on the requiremnts
+control_mode = 'PID';   % 'LQR' or 'PID'
+
+% use PID tuner GUI?
+% set true for tuning PID gains
+% set false for simulation after getting the desired gains
+% TODO: pick true or false based on requirements
+use_pid_tuner = false; % true or false;
+
+%% ---------------- Road input z_r(t) ----------------
+if strcmp(road_input, 'sine')
+    % sine input
+    Ar = 0.1;  fr = 0.5;                     % amplitude (m), frequency (Hz)
+    zr = Ar * sin(2*pi*fr*t);
+    zr_label = sprintf('Sine: %.2f m, %.2f Hz', Ar, fr);
+
+elseif strcmp(road_input, 'step')
+    % Step input
+    zr = 0.2*(t>=1.0);
+    zr_label = 'Step: 0.1 m @ t=1 s';
+else
+     error('Invalid road_input type. Choose ''sine'' or ''step''.');
+end
+
+%% ---------------- state-space model -----------------------------
+% states x = [Zs; Zsd; Xs; Y]
+% Y is the integral state (used to get rid of derivative terms of Zr)
+% system xdot = Ax + B1u + B2r
+% TODO: fill out the entires
+A = [ 0,                    1,  0,                                           0;
+     -(Cs*Ct)/(Ms*Mu),      0,  (Cs/Ms)*((Cs/Ms)+(Cs/Mu)+(Ct/Mu)) - Ks/Ms,  -(Cs/Ms);
+      Ct/Mu,                0, -(Cs/Ms + Cs/Mu + Ct/Mu),                     1;
+      Kt/Mu,                0, -(Ks/Ms + Ks/Mu + Kt/Mu),                     0 ];
+
+B1 = [ 0; 
+      1/Ms; 
+      0;
+      (1/Ms + 1/Mu)];
+
+B2 = [ 0;
+      (Cs*Ct)/(Ms*Mu);
+      - Ct/Mu;
+      - Kt/Mu ];
+      
+C  [0 0 1 0]; % Output Y = Xs
+
+%% --------- Augment with integral of output y_I = integral(Y dt) ---
+% x_a = [x; y_I], A_a = [A 0; C 0], B_a = [B; 0 0], C_a = [C 0]
+B = [B1, B2];
+Aa = [[A, zeros(4,1)]; [C, 0]];
+Ba = [B; 0 0];
+Ca = [C, 0];
+
+Bu  = Ba(:,1);    % control channel (active force)
+Bw  = Ba(:,2);    % disturbance channel (road)
+
+%% PID tuner plant
+if(use_pid_tuner)
+    G_u = ss(A, B(:,1), C, 0);    % Plant from control force U to output Y1
+    pidTuner(G_u, 'PID');         % Uncomment if you want to tune interactively
+    return
+end
+
+%% ---------------- Controller & Closed-loop simulation -------------------
+switch upper(control_mode)
+    case 'LQR'
+        % ---- LQR on augmented plant (u = -K x_a) ----
+        % TODO: tune the cost matrices
+        Qx   = 1e2*diag([  2,   0.2,   8,   0.2 ]);  % state cost
+        Qi   = 1e10;                                 % integral state weight on y_I
+        Qa   = blkdiag(Qx, Qi);
+        R    = 1e-1;                                 % control penalty
+        K    = lqr(Aa, Bu, Qa, R);                   % LQR gain
+
+    case 'PID'
+        % ---- Simple PID on Y1 with derivative on Y1dot and integral of Y1 ----
+        % u = -Kp*Y1 - Kd*Y1d - Ki*yI
+        % TODO: tune the PID gains
+        Kd = 208025;
+        Kp = 832100;
+        Ki = 624075;
+
+        % Build static state-feedback vector acting on [X1; X1d; Y1; Y1d; yI]
+        % Only Y1 (state 3), Y1d (state 4), and yI (state 5) are used:
+        K = [0, 0, Kp, Kd, Ki]; 
+
+    otherwise
+        error('Unknown control_mode. Use ''LQR'' or ''PID''.');
+end
+
+%% Closed-loop augmented simulation
+Acl = Aa - Bu*K;          % only the control column is used for feedback
+Bcl = Bw;                 % road is exogenous input
+sys_cl = ss(Acl, Bcl, eye(5), zeros(5,1));
+
+x0a = zeros(5,1);
+xa  = lsim(sys_cl, zr, t, x0a);            % xa = [x; y_I]
+x   = xa(:,1:4);
+
+% Control history
+u  = -(xa * K.').';      % u = -K * x_a
+u  = u(:);
+
+% Recover physical displacements for animation:
+X1 = x(:,1);
+Y1 = x(:,3);
+X2 = X1 - Y1;
+
+zs = X1;                 % body absolute displacement
+zu = X2;                 % wheel absolute displacement
+
+%% -------- Static plots: states, control, and input (time domain) --------
+% From state ordering: x = [X1; X1d; Y1; Y1d],  with  Y1 = X1 - X2
+X1  = x(:,1);               % z_s
+X1d = x(:,2);               % \dot z_s
+Y1  = x(:,3);               % z_s - z_u
+Y1d = x(:,4);               % \dot z_s - \dot z_u
+X2  = X1 - Y1;              % z_u
+X2d = X1d - Y1d;            % \dot z_u
+tire_defl = X2 - zr;        % z_u - z_r  (tire compression)
+
+fig = figure('Color','w','Name','Quarter-Car: Static Plots','NumberTitle','off');
+tl = tiledlayout(fig, 3, 2, 'TileSpacing','compact','Padding','compact');
+
+% Row 1, Col 1: body & wheel displacements
+ax11 = nexttile(tl,1); hold(ax11,'on'); grid(ax11,'on'); box(ax11,'on');
+plot(ax11, t, X1, 'LineWidth',1.6);     % z_s
+plot(ax11, t, X2, 'LineWidth',1.6);     % z_u
+legend(ax11, {'$z_s$ (body)', '$z_u$ (wheel)'}, 'Interpreter','latex','Location','best');
+xlabel(ax11, '$t~(\mathrm{s})$', 'Interpreter','latex');
+ylabel(ax11, '$\mathrm{displacement}~(\mathrm{m})$', 'Interpreter','latex');
+title(ax11, '$z_s$ and $z_u$', 'Interpreter','latex');
+
+% Row 1, Col 2: suspension deflections
+ax12 = nexttile(tl,2); hold(ax12,'on'); grid(ax12,'on'); box(ax12,'on');
+plot(ax12, t, Y1,         'LineWidth',1.6);  % suspension deflection
+legend(ax12, {'$z_s - z_u$'}, 'Interpreter','latex','Location','best');
+xlabel(ax12, '$t~(\mathrm{s})$', 'Interpreter','latex');
+ylabel(ax12, '$\mathrm{suspension deflection}~(\mathrm{m})$', 'Interpreter','latex');
+title(ax12, 'Suspension Deflection', 'Interpreter','latex');
+
+% Row 2, Col 2: tire deflections
+ax22 = nexttile(tl,4); hold(ax22,'on'); grid(ax22,'on'); box(ax22,'on');
+plot(ax22, t, tire_defl,  'LineWidth',1.6);  % tire deflection
+legend(ax22, {'$z_u - z_r$'}, 'Interpreter','latex','Location','best');
+xlabel(ax22, '$t~(\mathrm{s})$', 'Interpreter','latex');
+ylabel(ax22, '$\mathrm{tire deflection}~(\mathrm{m})$', 'Interpreter','latex');
+title(ax22, 'Tire Deflection', 'Interpreter','latex');
+
+% Row 2, Col 1: velocities
+ax21 = nexttile(tl,3); hold(ax21,'on'); grid(ax21,'on'); box(ax21,'on');
+plot(ax21, t, X1d, 'LineWidth',1.6);    % \dot z_s
+plot(ax21, t, X2d, 'LineWidth',1.6);    % \dot z_u
+legend(ax21, {'$\dot z_s$', '$\dot z_u$'}, 'Interpreter','latex','Location','best');
+xlabel(ax21, '$t~(\mathrm{s})$', 'Interpreter','latex');
+ylabel(ax21, '$\mathrm{velocity}~(\mathrm{m/s})$', 'Interpreter','latex');
+title(ax21, 'Velocities', 'Interpreter','latex');
+
+% Row 2, Col 2: control input u(t)
+ax23 = nexttile(tl,6); hold(ax23,'on'); grid(ax23,'on'); box(ax23,'on');
+plot(ax23, t, u, 'LineWidth',1.6);
+xlabel(ax23, '$t~(\mathrm{s})$', 'Interpreter','latex');
+ylabel(ax23, '$u~(\mathrm{N})$', 'Interpreter','latex');
+title(ax23, 'Active Suspension Force', 'Interpreter','latex');
+
+% Row 3, Col 1: road input
+ax31 = nexttile(tl,5); hold(ax31,'on'); grid(ax31,'on'); box(ax31,'on');
+plot(ax31, t, zr, 'LineWidth',1.6);
+xlabel(ax31, '$t~(\mathrm{s})$', 'Interpreter','latex');
+ylabel(ax31, '$z_r~(\mathrm{m})$', 'Interpreter','latex');
+title(ax31, 'Road Input', 'Interpreter','latex');
+
+% LaTeX tick labels everywhere + link time axes
+set([ax11,ax12,ax21,ax22,ax31], 'TickLabelInterpreter','latex');
+linkaxes([ax11,ax12,ax21,ax22,ax31],'x');
+xlim([t(1) t(end)]);
+
+%% ---------------- Animation (world-fixed road; car drives forward) -----
+opts = struct();
+opts.carSpeed = 1;
+
+% Pass control (u) and road (zr) to the animator
+uinfo = struct('t', t, 'zr', zr, 'label', zr_label, 'u', u);
+animate_quarter_car(t, zs, zu, zr, opts, uinfo);
+
+%% Evaluate performance metrics 
+% TODO: write code to check the performance metrics
+quarter_car_performance_eval(t, X1, X1d, X2, zr, u, control_mode);
+
+\end{lstlisting}
+
+\vspace{10mm}
+\textbf{MATLAB code: quarter\_car\_performance\_eval.m}
+\begin{lstlisting}[style=mymatlab, caption={}, label={lst:performance_metrics}]
+function metrics = quarter_car_performance_eval(t, X1, X1d, X2, zr, u, ctrlName)
+% QUARTER_CAR_PERFORMANCE
+%   Compute and print performance metrics for the quarter car project.
+%
+%   inputs:
+%       t       : time vector [s]
+%       X1      : sprung mass (body) displacement z_s [m]
+%       X1d     : sprung mass velocity z_s_dot [m/s]
+%       X2      : unsprung mass (wheel) displacement z_u [m]
+%       zr      : road displacement z_r [m]
+%       u       : control force [N]
+%       ctrlName: (optional) name of controller for printing header
+%
+%   outputs:
+%       metrics : struct with numeric values and ratings
+
+if nargin < 7
+    ctrlName = 'Controller';
+end
+
+t = t(:);
+X1  = X1(:);
+X1d = X1d(:);
+X2  = X2(:);
+zr  = zr(:);
+u   = u(:);
+
+dt = mean(diff(t));
+T  = t(end) - t(1);
+
+%% 1) Ride comfort: RMS body acceleration (sprung mass)
+a_s = gradient(X1d, dt);                % approximate z_s_ddot
+a_rms = sqrt( (1/T) * trapz(t, a_s.^2) );   % [m/s^2]
+
+% rating
+if a_rms <= 0.35
+    ride_rate = "Excellent";
+elseif a_rms <= 0.50
+    ride_rate = "Good";
+elseif a_rms <= 0.70
+    ride_rate = "Acceptable";
+else
+    ride_rate = "Poor";
+end
+
+%% 2) Road holding: RMS tire-road relative displacement (z_u - z_r)
+zh = X2 - zr;                           % tire deflection
+zh_rms = sqrt( (1/T) * trapz(t, zh.^2) );   % [m]
+
+if zh_rms <= 0.008
+    road_rate = "Excellent";
+elseif zh_rms <= 0.012
+    road_rate = "Good";
+elseif zh_rms <= 0.020
+    road_rate = "Acceptable";
+else
+    road_rate = "Poor";
+end
+
+%% 3) Transient performance: overshoot & settling time of sprung mass
+% use steady-state value from the last 10% of simulation
+Nss   = max(10, round(0.1*numel(t)));
+y     = X1;                             % output for transient metrics
+y_ss  = mean(y(end-Nss+1:end));
+
+% if steady state is ~0 (numerically), use road step amplitude
+if abs(y_ss) < 1e-6
+    y_target = max(zr);                 % 0.20 m pothole
+else
+    y_target = y_ss;
+end
+
+% Overshoot (percent)
+Mp = 100 * (max(y) - y_target) / abs(y_target);
+
+% Settling time (2% band around target)
+tol = 0.02 * abs(y_target);
+idx_last_out = find(abs(y - y_target) > tol, 1, 'last');
+if isempty(idx_last_out)
+    ts = 0.0;
+else
+    ts = t(idx_last_out+1);
+end
+
+% rating for Mp
+if (Mp <= 2) 
+    trans_rate_Mp = "Excellent";
+elseif (Mp <= 5) 
+    trans_rate_Mp = "Good";
+elseif (Mp <= 10) 
+    trans_rate_Mp = "Acceptable";
+else
+    trans_rate_Mp = "Poor";
+end
+
+% rating for ts
+if (ts <= 3)
+    trans_rate_ts = "Excellent";
+elseif (ts <= 5)
+    trans_rate_ts = "Good";
+elseif (ts <= 7)
+    trans_rate_ts = "Acceptable";
+else
+    trans_rate_ts = "Poor";
+end
+
+%% 4) Suspension deflection: max |z_s - z_u|
+susp_defl = X1 - X2;
+max_susp = max(abs(susp_defl));         % [m]
+
+if max_susp <= 0.015
+    susp_rate = "Excellent";
+elseif max_susp <= 0.025
+    susp_rate = "Good";
+elseif max_susp <= 0.040
+    susp_rate = "Acceptable";
+else
+    susp_rate = "Poor";
+end
+
+%% 5) Control effort: RMS of u(t)
+u_rms_N  = sqrt( (1/T) * trapz(t, u.^2) );   % [N]
+u_rms_kN = u_rms_N / 1000;                   % [kN]
+
+if u_rms_kN <= 1.5
+    effort_rate = "Excellent";
+elseif u_rms_kN <= 2.5
+    effort_rate = "Good";
+elseif u_rms_kN <= 3.5
+    effort_rate = "Acceptable";
+else
+    effort_rate = "Poor";
+end
+
+%% Pack in struct
+metrics = struct();
+metrics.a_rms      = a_rms;
+metrics.a_rating   = ride_rate;
+metrics.zhrms      = zh_rms;
+metrics.road_rating= road_rate;
+metrics.Mp_percent = Mp;
+metrics.ts         = ts;
+metrics.trans_rating_Mp = trans_rate_Mp;
+metrics.trans_rating_ts = trans_rate_ts;
+metrics.max_susp   = max_susp;
+metrics.susp_rating= susp_rate;
+metrics.u_rms_kN   = u_rms_kN;
+metrics.effort_rating = effort_rate;
+
+%% Pretty table printout
+MetricName = [ "Ride Comfort a_{rms}";
+               "Road Holding z_{h,rms}";
+               "Overshoot M_p";
+               "Settling Time t_s";
+               "Max Suspension Defl.";
+               "Control Effort u_{rms}" ];
+
+Value = [ a_rms;
+          zh_rms;
+          Mp;
+          ts;
+          max_susp;
+          u_rms_kN ];
+
+Units = [ "m/s^2";
+          "m";
+          "%";
+          "s";
+          "m";
+          "kN" ];
+
+Rating = [ ride_rate;
+           road_rate;
+           trans_rate_Mp;
+           trans_rate_ts;
+           susp_rate;
+           effort_rate ];
+
+Tperf = table(Value, Units, Rating, 'RowNames', cellstr(MetricName));
+
+fprintf('\n==============================================\n');
+fprintf('Quarter-car performance metrics: %s\n', ctrlName);
+fprintf('==============================================\n');
+disp(Tperf);
+
+end
+\end{lstlisting}
+    
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\addtolength{\textheight}{-12cm}   % This command serves to balance the column lengths
+                                  % on the last page of the document manually. It shortens
+                                  % the textheight of the last page by a suitable amount.
+                                  % This command does not take effect until the next page
+                                  % so it should come on the page before the last. Make
+                                  % sure that you do not shorten the textheight too much.
+
+
+\end{document}
+ 

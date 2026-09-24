@@ -62,7 +62,9 @@ See the [MATLAB animation screenshots and numerical results](solutions/README.md
 
 ## Materials
 
-- [Assignment](docs/project.pdf)
+- [Corrected LaTeX assignment](docs/project.pdf)
+- [Detailed worked solution with MATLAB code](solutions/solution-notes.pdf)
+- [LaTeX sources and build instructions](latex/README.md)
 - [State-space model](docs/state-space-model.pdf)
 - [Editable system diagram](docs/system-model.pptx)
 - [Starter code](starter/main_file.m)

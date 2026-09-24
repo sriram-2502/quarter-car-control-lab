@@ -6,3 +6,11 @@ __pycache__/
 .venv/
 .DS_Store
 Thumbs.db
+
+# LaTeX build intermediates (final PDFs are tracked)
+latex/*.aux
+latex/*.log
+latex/*.out
+latex/*.toc
+latex/*.xdv
+latex/*.synctex.gz
